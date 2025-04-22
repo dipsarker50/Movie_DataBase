@@ -1,0 +1,275 @@
+
+      .signup_body {
+        font-family: Arial;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      
+      .signup {
+        width: 350px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 30px 25px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        background-color: #fff;
+      }
+      
+      .signup fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .signup legend {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      
+      .signup label {
+        font-size: 14px;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+      }
+      
+      .signup input[type="text"],
+      .signup input[type="email"],
+      .signup input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 18px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      
+      .signup button {
+        width: 100%;
+        background-color: #f5c518;
+        color: black;
+        padding: 10px;
+        border: none;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+      
+      .signup button:hover {
+        background-color: #e3b30c;
+      }
+      
+      .signup #navigation_signup {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 14px;
+      }
+      
+      .signup #navigation_signup a {
+        color: #0073e6;
+        text-decoration: none;
+      }
+      
+      .signup #navigation_signup a:hover {
+        text-decoration: underline;
+      }
+      
+      .signup #error {
+        color: red;
+        font-size: 14px;
+        margin-bottom: 10px;
+        justify-content: center;
+        display: flex;
+      }
+      
+      .signup table {
+        width: 100%;
+      }
+      
+      .signup td {
+        display: block;
+        width: 100%;
+      }
+
+
+      /* Login Screen */
+
+
+      .login_body{
+        font-family:Arial;
+        background-color: #ffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+      }
+
+      .login {
+        width: 350px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 30px 25px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        background-color: #fff;
+      }
+
+      .login fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .login legend {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      
+      .login label {
+        font-size: 14px;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+      }
+      
+      .login input[type="text"],
+      .login input[type="email"],
+      .login input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 18px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      
+      .login button {
+        width: 100%;
+        background-color: #f5c518;
+        color: black;
+        padding: 10px;
+        border: none;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+      
+      .login button:hover {
+        background-color: #e3b30c;
+      }
+      
+      .login #navigation_login {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 14px;
+      }
+      
+      .login #navigation_login a {
+        color: #0073e6;
+        text-decoration: none;
+      }
+      
+      .login #navigation_login a:hover {
+        text-decoration: underline;
+      }
+      
+      .login #error {
+        color: red;
+        font-size: 14px;
+        margin-bottom: 10px;
+        justify-content: center;
+        display: flex;
+      }
+      
+      .login table {
+        width: 100%;
+      }
+      
+      .login td {
+        display: block;
+        width: 100%;
+      }
+
+
+      /* Forget Password Screen */
+      .forget_password_body {
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      
+      .forget_password {
+        width: 350px;
+        padding: 25px 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      }
+      
+      .forget_password h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      
+      .forget_password p {
+        font-size: 14px;
+        margin-bottom: 15px;
+        color: #333;
+      }
+      
+      .forget_password #error {
+        color: red;
+        font-size: 14px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      
+      .forget_password fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .forget_password label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 6px;
+      }
+      
+      .forget_password input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      
+      .forget_password button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 10px;
+        background-color: #f5c518;
+        color: black;
+        border: none;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+      
+      .forget_password button:hover {
+        background-color: #e3b30c;
+      }
+      
+
+      

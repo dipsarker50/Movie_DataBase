@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Create Account</title>
+  <title>Login Screen</title>
+  <script src="index.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div id="container_login">
+
+<body class="login_body">
+  <div class="login">
     <p id="error"></p>
     <form>
       <fieldset>
@@ -14,82 +17,24 @@
             <td colspan="2"><label>Email</label></td>
           </tr>
           <tr>
-             <td ><input type="email" id="email" /></td>
+             <td ><input type="email" id="email" placeholder="you@example.com"/></td>
           </tr>
           <tr>
             <td colspan="2"><label>Password</label></td>
           </tr>
           <tr>
                 <td colspan="2">
-                        <input type="password" id="pass" placeholder="at least 8 characters" />
+                        <input type="password" id="password" placeholder="at least 8 characters" />
                 </td>
           </tr>
         </table>
-        <button type="button" onclick="validateForm()">Create your account</button>
+        <button type="button" onclick="validateSignInForm()">Login</button>
       </fieldset>
     </form>
-    <div id="footer">
+    <div id="navigation_login">
         New to IMDb? <a href="SignUp.html">SignUp ›</a> <br>
         Forget Password? <a href="forget_password.html">Reset ›</a>
     </div>
   </div>
-
-  <script>
-    function validateForm() {
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("pass").value;
-      const error = document.getElementById("error");
-
-      error.textContent = "";
-
-      if (!email || !password) {
-        error.textContent = "Please fill in all fields.";
-        error.style.color = "red"; 
-        return false;
-      }
-
-      if(!email_validate()){
-        error.textContent = "Invalid email address.";
-        error.style.color = "red"; 
-        return false;
-      }
-
-      if (password.length < 8) {
-        error.textContent = "Password must be at least 8 characters long.";
-        error.style.color = "red"; 
-        return false;
-      }
-
-      alert("Account Login Successfully!");
-      return true;
-    }
-
-    function email_validate() {
-        let email = document.getElementById("email").value;
-        let error = document.getElementById("error");
-
-        if (email === "") {
-                error.innerHTML = "Email cannot be empty!";
-                return false;
-        }
-
-        if (email.indexOf("@") <= 0 || email.indexOf("@") === email.length - 1) {
-                error.innerHTML = "Invalid email! '@' must be in the middle.";
-                error.style.color = "red"; 
-                return false;
-        }
-
-        let at = email.indexOf("@");
-        let dot = email.lastIndexOf(".");
-        if (dot <= at + 1 || dot === email.length - 1) {
-                error.innerHTML = "Invalid email! '.' must come after '@' and not at the end.";
-                error.style.color = "red"; 
-                return false;
-        }
-
-        return true;
-    }
-
-  </script>
 </body>
 </html>

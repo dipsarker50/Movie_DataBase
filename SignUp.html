@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
   <title>Create Account</title>
+  <script src="index.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div id="container">
+<body class="signup_body">
+  <div class="signup">
     <p id="error"></p>
     <form>
       <fieldset>
@@ -16,12 +18,12 @@
           </tr>
           <tr>
             <td><label>Email</label></td>
-            <td><input type="email" id="email" /></td>
+            <td><input type="email" id="email" placeholder="you@example.com"/></td>
           </tr>
           <tr>
             <td><label>Password</label></td>
             <td>
-              <input type="password" id="pass" placeholder="at least 8 characters" />
+              <input type="password" id="password" placeholder="at least 8 characters" />
             </td>
           </tr>
           <tr>
@@ -29,45 +31,16 @@
             <td><input type="password" id="repassword" /></td>
           </tr>
         </table>
-        <button type="button" onclick="validateForm()">Create your account</button>
+        <button type="button" onclick="validateSignUpForm()">Create your account</button>
       </fieldset>
     </form>
-    <div id="footer">
+    <div id="navigation_signup">
       Already have an account? <a href="login.html">Sign in ›</a>
     </div>
   </div>
 
   <script>
-    function validateForm() {
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("pass").value;
-      const confirmPassword = document.getElementById("repassword").value;
-      const error = document.getElementById("error");
-
-      error.textContent = "";
-
-      if (!name || !email || !password || !confirmPassword) {
-        error.textContent = "Please fill in all fields.";
-        error.style.color = "red"; 
-        return false;
-      }
-
-      if (password.length < 8) {
-        error.textContent = "Password must be at least 8 characters long.";
-        error.style.color = "red"; 
-        return false;
-      }
-
-      if (password !== confirmPassword) {
-        error.textContent = "Passwords do not match.";
-        error.style.color = "red"; 
-        return false;
-      }
-
-      alert("Account created successfully!");
-      return true;
-    }
+    
   </script>
 </body>
 </html>
