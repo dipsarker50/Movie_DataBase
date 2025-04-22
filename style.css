@@ -19,8 +19,6 @@
       
       .signup fieldset {
         border: none;
-        padding: 0;
-        margin: 0;
       }
       
       .signup legend {
@@ -29,7 +27,7 @@
         margin-bottom: 20px;
       }
       
-      .signup label {
+      .signup label, .reset label {
         font-size: 14px;
         font-weight: bold;
         display: block;
@@ -38,7 +36,8 @@
       
       .signup input[type="text"],
       .signup input[type="email"],
-      .signup input[type="password"] {
+      .signup input[type="password"], 
+      .reset input[type="password"]{
         width: 100%;
         padding: 10px;
         margin-bottom: 18px;
@@ -47,7 +46,7 @@
         box-sizing: border-box;
       }
       
-      .signup button {
+      .signup button, .reset input[type="button"] {
         width: 100%;
         background-color: #f5c518;
         color: black;
@@ -59,7 +58,7 @@
         cursor: pointer;
       }
       
-      .signup button:hover {
+      .signup button:hover , .reset input[type="button"]:hover{
         background-color: #e3b30c;
       }
       
@@ -78,7 +77,7 @@
         text-decoration: underline;
       }
       
-      .signup #error {
+      .signup #error, .reset #error {
         color: red;
         font-size: 14px;
         margin-bottom: 10px;
@@ -86,11 +85,11 @@
         display: flex;
       }
       
-      .signup table {
+      .signup table , .reset table{
         width: 100%;
       }
       
-      .signup td {
+      .signup td,.reset td{
         display: block;
         width: 100%;
       }
@@ -271,5 +270,32 @@
         background-color: #e3b30c;
       }
       
+      .reset_body{
+        font-family:Arial;
+        background-color:#ffff;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+      }
+
+      .reset{
+        width: 350px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 30px 25px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        background-color: #fff;
+      }
+
+      .reset fieldset{
+        border: none;
+      }
+
+      .reset legend {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
 
       

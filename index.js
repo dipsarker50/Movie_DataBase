@@ -121,3 +121,28 @@ function validateForgetPassForm(){
         error.textContent = "";
         return true;
 }
+
+function vaildateResetPass(){
+        password = document.getElementById("password").value;
+        confirmPassword = document.getElementById("renewpassword").value;
+        error =document.getElementById("error");
+        if(!password || !confirmPassword){
+                error.textContent = "Please fill in all fields.";
+                error.style.color = "red"; 
+                return false;
+
+        }
+        if(!password_vaildate()){
+                error.textContent = "Password must be at least 8 characters long.";
+                error.style.color=red;
+                return false;
+        }
+        else if(password!==confirmPassword){
+                error.innerHTML="Password not Matched";
+                error.style.color=red;
+                return false;
+
+        }
+        error.innerHTML="";
+        return true;
+}
