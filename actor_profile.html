@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Actor Profile</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
+    h2 { color: #333; }
+    .section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .timeline { border-left: 3px solid #f5c518; padding-left: 20px; }
+    .timeline-item { margin-bottom: 10px; }
+    .collab-map { display: flex; flex-wrap: wrap; gap: 10px; }
+    .collab-map div { background: #ddd; padding: 10px 15px; border-radius: 20px; }
+    .awards { list-style: none; padding: 0; }
+    .awards li { margin-bottom: 8px; }
+    .career-graph { width: 100%; height: 150px; background: linear-gradient(to top, #f5c518 30%, transparent 30%); position: relative; margin-bottom: 20px; }
+    .bar { position: absolute; bottom: 0; width: 20px; background: #f5c518; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>Actor Profile: Tom Hardy</h1>
+
+<div class="section">
+    <h2>Filmography Timeline</h2>
+    <div class="timeline" id="timeline"></div>
+</div>
+
+<div class="section">
+    <h2>Frequent Co-stars</h2>
+    <div class="collab-map" id="collabMap"></div>
+</div>
+
+<div class="section">
+    <h2>Award History</h2>
+    <ul class="awards" id="awards"></ul>
+</div>
+
+<script>
+// Fake data
+const filmography = [
+    { year: 2008, movie: 'Bronson' },
+    { year: 2010, movie: 'Inception' },
+    { year: 2012, movie: 'The Dark Knight Rises' },
+    { year: 2015, movie: 'Mad Max: Fury Road' },
+    { year: 2017, movie: 'Dunkirk' },
+    { year: 2021, movie: 'Venom: Let There Be Carnage' }
+];
+
+const coStars = ['Leonardo DiCaprio', 'Charlize Theron', 'Cillian Murphy', 'Joseph Gordon-Levitt'];
+
+const awards = [
+    '2016 Oscar Nomination: Best Supporting Actor (The Revenant)',
+    '2016 BAFTA Winner: Best Actor (Mad Max: Fury Road)',
+    '2018 Oscar Nomination: Best Actor (Dunkirk)'
+];
+
+const careerGraphData = [1, 2, 3, 2, 4, 1]; // Fake film count per year
+
+// Timeline Rendering
+const timelineDiv = document.getElementById('timeline');
+filmography.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'timeline-item';
+    div.textContent = `${item.year} - ${item.movie}`;
+    timelineDiv.appendChild(div);
+});
+
+// Collaboration Map
+const collabDiv = document.getElementById('collabMap');
+coStars.forEach(star => {
+    const div = document.createElement('div');
+    div.textContent = star;
+    collabDiv.appendChild(div);
+});
+
+// Awards
+const awardsUl = document.getElementById('awards');
+awards.forEach(award => {
+    const li = document.createElement('li');
+    li.textContent = award;
+    awardsUl.appendChild(li);
+});
+
+// Career Graph
+const graph = document.getElementById('careerGraph');
+const barWidth = 40;
+careerGraphData.forEach((count, idx) => {
+    const bar = document.createElement('div');
+    bar.className = 'bar';
+    bar.style.height = (count * 30) + 'px';
+    bar.style.left = (idx * (barWidth + 10)) + 'px';
+    bar.style.width = barWidth + 'px';
+    graph.appendChild(bar);
+});
+</script>
+
+</body>
+</html>
