@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <h1>Dashboard</h1>
+
+  <div id="summary">
+    <div class="widget" onclick="showDetail('Movies')">Total Movies: 120</div>
+    <div class="widget" onclick="showDetail('Users')">Total Users: 35</div>
+    <div class="widget" onclick="showDetail('Reviews')">Total Reviews: 210</div>
+  </div>
+
+  <h2>Quick Actions</h2>
+  <button onclick="quickAction('Add Movie')">Add Movie</button>
+  <button onclick="quickAction('Manage Users')">Manage Users</button>
+  <button onclick="quickAction('View Reports')">View Reports</button>
+
+  <div id="details"></div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
