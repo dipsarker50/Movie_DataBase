@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: #fff;
+  }
+  
+  h1 {
+    color: #f5c518;
+    font-size: 28px;
+  }
+  
+  form {
+    max-width: 300px;
+  }
+  
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f5c518;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+  }
+  
+  #formSuccess {
+    color: green;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
