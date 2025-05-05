@@ -64,7 +64,7 @@ function validateSignInForm() {
         }
         error.textContent="";
   
-        window.location.href = "#";
+        window.location.href = "dashboard.html";
         return true;
 }
 
