@@ -64,7 +64,6 @@ function validateSignInForm() {
         }
         error.textContent="";
   
-        window.location.href = "#";
         return true;
 }
 
@@ -218,7 +217,6 @@ function searchBoxVaild(){
         });
       }
       
-      // Apply filters
       function applyFilters() {
         const searchText = document.getElementById('searchInput').value.toLowerCase();
         const selectedGenres = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(checkbox => checkbox.value);
@@ -255,7 +253,7 @@ function searchBoxVaild(){
 
 
       function updateCountdown() {
-        const releaseDate = new Date("April 29, 2025 00:00:00").getTime(); // Release Time
+        const releaseDate = new Date("May 29, 2025 00:00:00").getTime(); // Release Time
         const now = new Date().getTime();
         const distance = releaseDate - now;
 
