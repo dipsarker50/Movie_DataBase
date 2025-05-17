@@ -1,22 +1,30 @@
+<?php
+// session_start();
+// if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
+//     header('location: ../view/login.html');
+//     exit();
+// }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Movie Landing Page</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="index.js"></script>
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/index.js"></script>
 </head>
 
 <body onload="load">
 
         <nav>
-                <div class="logo">MovieDB</div>
+                <div class="logo"><a href="index.php" style="text-decoration: none; color: black; ">MovieDB</div>
                 <div class="menu">
-                  <a href="">Home</a>
-                  <a href="movie.html">Movies</a>
-                  <a href="tv_show.html">TV Shows</a>
-                  <a href="login.html">Login</a>
+                  <a href="#">Home</a>
+                  <a href="view/movie.php">Movies</a>
+                  <a href="view/tv_show.php">TV Shows</a>
+                  <a href="view/login.html">Login</a>
                 </div>
         </nav>
 
@@ -35,14 +43,14 @@
         <h2>Trending Movies</h2>
         <div class="movie-slider">
 
-            <a href="movie_details.html" style="text-decoration: none; color: inherit;">
+            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
             <div class="movie-card">
                 <div class="movie-image-wrapper">
                     <img src="https://image.tmdb.org/t/p/w500/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg" alt="Movie 1">
                 </div>
                 <p>Movie Title 1</p>
             </div>
-            <a href="movie_details.html" style="text-decoration: none; color: inherit;">
+            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
             <div class="movie-card">
                 <div class="movie-image-wrapper">
                     <img src="https://image.tmdb.org/t/p/w500/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg" alt="Movie 2">
@@ -50,7 +58,7 @@
                 <p>Movie Title 2</p>
             </div>
 
-            <a href="movie_details.html" style="text-decoration: none; color: inherit;">
+            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
             <div class="movie-card">
                 <div class="movie-image-wrapper">
                     <img src="https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" alt="Movie 3">
@@ -58,7 +66,7 @@
                 <p>Movie Title 3</p>
             </div>
 
-            <a href="movie_details.html" style="text-decoration: none; color: inherit;">
+            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
             <div class="movie-card">
                 <div class="movie-image-wrapper">
                     <img src="https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg" alt="Movie 4">
@@ -66,7 +74,7 @@
                 <p>Movie Title 4</p>
             </div>
 
-            <a href="movie_details.html" style="text-decoration: none; color: inherit;">
+            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
             <div class="movie-card">
                 <div class="movie-image-wrapper">
                     <img src="https://image.tmdb.org/t/p/w500/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg" alt="Movie 2">
@@ -74,7 +82,7 @@
                 <p>Movie Title 2</p>
             </div>
 
-            <a href="movie_details.html" style="text-decoration: none; color: inherit;">
+            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
             <div class="movie-card">
                 <div class="movie-image-wrapper">
                     <img src="https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" alt="Movie 3">
@@ -82,7 +90,7 @@
                 <p>Movie Title 3</p>
             </div>
 
-            <a href="movie_details.html" style="text-decoration: none; color: inherit;">
+            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
             <div class="movie-card">
                 <div class="movie-image-wrapper">
                     <img src="https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg" alt="Movie 4">
@@ -97,7 +105,7 @@
         <h2>Trending TV Shows</h2>
         <div class="movie-slider">
             <!-- TV Shows -->
-            <a href="movie_details.html" style="text-decoration: none; color: inherit;">
+            <a href="./controller/movie_details.php" style="text-decoration: none; color: inherit;">
             <div class="movie-card">
                 <div class="movie-image-wrapper">
                     <img src="https://image.tmdb.org/t/p/w500/6kbAMLteGO8yyewYau6bJ683sw7.jpg" alt="TV Show 1">
@@ -106,13 +114,13 @@
             </div>
             <div class="movie-card">
                 <div class="movie-image-wrapper">
-                        <a href="movie_details.html" style="text-decoration: none; color: inherit;"></a>
+                        <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;"></a>
                     <img src="https://image.tmdb.org/t/p/w500/epGV5lIMN0E6ay2xbYl9bB5WhzF.jpg" alt="TV Show 2">
                 </div>
                 <p>TV Show Title 2</p>
             </div>
 
-            <a href="movie_details.html" style="text-decoration: none; color: inherit;"></a>
+            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;"></a>
             <div class="movie-card">
                 <div class="movie-image-wrapper">
                     <img src="https://image.tmdb.org/t/p/w500/uGy4DCmM33I7l86W7iCskNkvmLD.jpg" alt="TV Show 3">

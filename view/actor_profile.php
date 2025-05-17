@@ -1,21 +1,17 @@
+<?php
+session_start();
+if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
+    header('location: ../view/login.html');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Actor Profile</title>
-<style>
-    body { font-family: Arial, sans-serif; margin: 20px; background: #f4f4f4; }
-    h2 { color: #333; }
-    .section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .timeline { border-left: 3px solid #f5c518; padding-left: 20px; }
-    .timeline-item { margin-bottom: 10px; }
-    .collab-map { display: flex; flex-wrap: wrap; gap: 10px; }
-    .collab-map div { background: #ddd; padding: 10px 15px; border-radius: 20px; }
-    .awards { list-style: none; padding: 0; }
-    .awards li { margin-bottom: 8px; }
-    .career-graph { width: 100%; height: 150px; background: linear-gradient(to top, #f5c518 30%, transparent 30%); position: relative; margin-bottom: 20px; }
-    .bar { position: absolute; bottom: 0; width: 20px; background: #f5c518; text-align: center; }
-</style>
+<link rel="stylesheet" href="../assets/actor_profile.css">
 </head>
 <body>
 
@@ -37,7 +33,6 @@
 </div>
 
 <script>
-// Fake data
 const filmography = [
     { year: 2008, movie: 'Bronson' },
     { year: 2010, movie: 'Inception' },
@@ -55,9 +50,8 @@ const awards = [
     '2018 Oscar Nomination: Best Actor (Dunkirk)'
 ];
 
-const careerGraphData = [1, 2, 3, 2, 4, 1]; // Fake film count per year
+const careerGraphData = [1, 2, 3, 2, 4, 1]; 
 
-// Timeline Rendering
 const timelineDiv = document.getElementById('timeline');
 filmography.forEach(item => {
     const div = document.createElement('div');
@@ -66,7 +60,6 @@ filmography.forEach(item => {
     timelineDiv.appendChild(div);
 });
 
-// Collaboration Map
 const collabDiv = document.getElementById('collabMap');
 coStars.forEach(star => {
     const div = document.createElement('div');
@@ -74,7 +67,6 @@ coStars.forEach(star => {
     collabDiv.appendChild(div);
 });
 
-// Awards
 const awardsUl = document.getElementById('awards');
 awards.forEach(award => {
     const li = document.createElement('li');
@@ -82,7 +74,6 @@ awards.forEach(award => {
     awardsUl.appendChild(li);
 });
 
-// Career Graph
 const graph = document.getElementById('careerGraph');
 const barWidth = 40;
 careerGraphData.forEach((count, idx) => {

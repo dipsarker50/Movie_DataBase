@@ -64,7 +64,10 @@ function validateSignInForm() {
         }
         error.textContent="";
   
+<<<<<<< HEAD
         window.location.href = "dashboard.html";
+=======
+>>>>>>> Dip-Sarker
         return true;
 }
 
@@ -159,8 +162,8 @@ function toggleEdit() {
         });
       
         fileInput.style.display = isDisabled ? "block" : "none";
-      
         button.textContent = isDisabled ? "Save" : "Edit";
+        document.getElementsByName("name")[0].value = isDisabled ? "save" : "";
       
         if (!isDisabled) {
           alert("Profile saved!");
@@ -209,7 +212,7 @@ function searchBoxVaild(){
       
         list.forEach(movie => {
           grid.innerHTML += `
-                <a href="movie_details.html?title=${encodeURIComponent(movie.title)}" style="text-decoration:none; color:inherit;">
+                <a href="movie_details.php?title=${encodeURIComponent(movie.title)}" style="text-decoration:none; color:inherit;">
             <div class="movie-card">
               <img src="${movie.poster}" alt="${movie.title}">
               <p>${movie.title}</p>
@@ -218,7 +221,6 @@ function searchBoxVaild(){
         });
       }
       
-      // Apply filters
       function applyFilters() {
         const searchText = document.getElementById('searchInput').value.toLowerCase();
         const selectedGenres = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(checkbox => checkbox.value);
@@ -255,7 +257,7 @@ function searchBoxVaild(){
 
 
       function updateCountdown() {
-        const releaseDate = new Date("April 29, 2025 00:00:00").getTime(); // Release Time
+        const releaseDate = new Date("May 29, 2025 00:00:00").getTime(); // Release Time
         const now = new Date().getTime();
         const distance = releaseDate - now;
 

@@ -1,21 +1,29 @@
+<?php
+session_start();
+if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
+    header('location: login.html');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>Movies</title>
-  <link rel="stylesheet" href="movie.css">
-  <script src="index.js"></script>
+  <link rel="stylesheet" href="../assets/movie.css">
+  <script src="../assets/index.js"></script>
 </head>
 <body onload="loadMovies()">
 
         
 
 <nav>
-  <div class="logo">MovieDB</div>
+  <div class="logo"><a href="../index.php" style="text-decoration: none; color: black; ">MovieDB</div>
   <div class="menu">
-    <a href="landing_page.html">Home</a>
+    <a href="../view/landing_page.php">Home</a>
     <a href="#">Movies</a>
-    <a href="tv_show.html">TV Shows</a>
+    <a href="../view/tv_show.php">TV Shows</a>
     <a href="#">Login</a>
   </div>
 </nav>

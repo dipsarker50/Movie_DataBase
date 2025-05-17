@@ -1,11 +1,20 @@
+<?php
+session_start();
+if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
+    header('location: ../view/login.html');
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Movie Details - Havoc</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="index.js"></script>
+    <link rel="stylesheet" href="../assets/style.css">
+    <script src="../assets/index.js"></script>
 </head>
 
 <body>
