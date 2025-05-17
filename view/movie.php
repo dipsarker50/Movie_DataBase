@@ -19,7 +19,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
         
 
 <nav>
-  <div class="logo">MovieDB</div>
+  <div class="logo"><a href="../index.php" style="text-decoration: none; color: black; ">MovieDB</div>
   <div class="menu">
     <a href="../view/landing_page.php">Home</a>
     <a href="#">Movies</a>

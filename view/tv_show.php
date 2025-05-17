@@ -11,7 +11,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <head>
   <meta charset="UTF-8">
   <title>TV show</title>
-  <link rel="stylesheet" href="../assets/tv_show.php">
+  <link rel="stylesheet" href="../assets/movie.css">
   <script src="../assets/index.js"></script>
 </head>
 <body onload="loadMovies()">
@@ -22,7 +22,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
   <div class="logo">MovieDB</div>
   <div class="menu">
     <a href="landing_page.php">Home</a>
-    <a href="movie.html">Movies</a>
+    <a href="movie.php">Movies</a>
     <a href="#">TV Shows</a>
     <a href="login.html">Login</a>
   </div>

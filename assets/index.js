@@ -158,8 +158,8 @@ function toggleEdit() {
         });
       
         fileInput.style.display = isDisabled ? "block" : "none";
-      
         button.textContent = isDisabled ? "Save" : "Edit";
+        document.getElementsByName("name")[0].value = isDisabled ? "save" : "";
       
         if (!isDisabled) {
           alert("Profile saved!");
@@ -208,7 +208,7 @@ function searchBoxVaild(){
       
         list.forEach(movie => {
           grid.innerHTML += `
-                <a href="movie_details.html?title=${encodeURIComponent(movie.title)}" style="text-decoration:none; color:inherit;">
+                <a href="movie_details.php?title=${encodeURIComponent(movie.title)}" style="text-decoration:none; color:inherit;">
             <div class="movie-card">
               <img src="${movie.poster}" alt="${movie.title}">
               <p>${movie.title}</p>

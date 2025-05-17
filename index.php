@@ -1,9 +1,9 @@
 <?php
-session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
-    header('location: ../view/login.html');
-    exit();
-}
+// session_start();
+// if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
+//     header('location: ../view/login.html');
+//     exit();
+// }
 ?>
 
 <!DOCTYPE html>
@@ -12,19 +12,19 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <head>
     <meta charset="UTF-8">
     <title>Movie Landing Page</title>
-    <link rel="stylesheet" href="../assets/style.css">
-    <script src="../assets/index.js"></script>
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/index.js"></script>
 </head>
 
 <body onload="load">
 
         <nav>
-                <div class="logo">MovieDB</div>
+                <div class="logo"><a href="index.php" style="text-decoration: none; color: black; ">MovieDB</div>
                 <div class="menu">
-                  <a href="../view/landing_page.php">Home</a>
-                  <a href="../view/movie.php">Movies</a>
-                  <a href="../view/tv_show.php">TV Shows</a>
-                  <a href="../controller/login_check.php">Login</a>
+                  <a href="#">Home</a>
+                  <a href="view/movie.php">Movies</a>
+                  <a href="view/tv_show.php">TV Shows</a>
+                  <a href="view/login.html">Login</a>
                 </div>
         </nav>
 
