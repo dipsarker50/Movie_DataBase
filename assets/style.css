@@ -385,7 +385,7 @@
         color: #333;
       }
   
-      nav {
+      /* nav {
         background-color: #f5c518;
         padding: 15px 30px;
         display: flex;
@@ -407,7 +407,17 @@
         text-decoration: none;
         color: black;
         font-weight: bold;
-      }
+      } */
+
+      
+
+
+
+      
+
+
+
+
   
       .banner {
         background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl9BcgXCBK15cXryD_jOe-XtQ86nZC0m2EfQ&s'); 

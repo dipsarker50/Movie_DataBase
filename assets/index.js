@@ -100,7 +100,6 @@ function validateSignUpForm() {
           return false;
         }
         error.textContent="";
-        alert("Account created successfully!");
         return true;
 }
 
@@ -252,24 +251,23 @@ function searchBoxVaild(){
       });
 
 
-      function updateCountdown() {
-        const releaseDate = new Date("May 29, 2025 00:00:00").getTime(); // Release Time
-        const now = new Date().getTime();
-        const distance = releaseDate - now;
+    //   function updateCountdown() {
+    //     const releaseDate = new Date("May 29, 2025 00:00:00").getTime(); // Release Time
+    //     const now = new Date().getTime();
+    //     const distance = releaseDate - now;
 
-        if (distance < 0) {
-            document.getElementById("countdown").innerHTML = "Released!";
-            return;
-        }
+    //     if (distance < 0) {
+    //         document.getElementById("countdown").innerHTML = "Released!";
+    //         return;
+    //     }
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    //     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    //     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    //     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById("countdown").innerHTML =
-            `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
+    //     //document.getElementById("countdown").innerHTML =`${days}d ${hours}h ${minutes}m ${seconds}s`;
+    // }
 
     setInterval(updateCountdown, 1000);
           

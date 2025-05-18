@@ -1,21 +1,33 @@
 <?php
 session_start();
-$_SESSION['status']=false;
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = trim($_POST['email']);
+require_once('../model/userModel.php');
+
+$_SESSION['status'] = false;
+$_SESSION['loginError'] = '';
+$_SESSION['username']='';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    if ($username == "" || $password == "") {
-        header('location:../view/login.html');
-    } else if ($username == $password) {
+    $user = [
+        'email'    => $email,
+        'password' => $password
+    ];
+
+    if (login($user)) {
         $_SESSION['status'] = true;
-        header('location:../view/landing_page.php');
+        $_SESSION['username'] = $email;
+        header('Location: ../index.php');
         exit();
     } else {
-        echo "invalid user!";
+        $_SESSION['loginError'] = " Email and password do not match.";
+        header('Location: ../view/login.php');
+        exit();
     }
+
 } else {
-    header('location:../view/login.html');
+    header('Location: ../view/login.php');
     exit();
 }
-?>
