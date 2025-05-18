@@ -1,3 +1,14 @@
+<?php
+session_start();
+$username = $_SESSION['username'];
+if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
+    $key = 'Login';
+}else{
+    $key = 'Profile';
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,16 +105,16 @@
     document.getElementById('scoreBoard').style.display = 'block';
     document.getElementById('audienceScore').innerText = selectedStars;
 
-    // Random male/female percentages
-    var male = Math.floor(Math.random() * 50) + 50; // 50-99%
+    
+    var male = Math.floor(Math.random() * 50) + 50; 
     var female = 100 - male;
 
     document.getElementById('demographics').style.display = 'block';
     document.getElementById('malePercent').innerText = male;
     document.getElementById('femalePercent').innerText = female;
 
-    // Random critic score
-    var criticScore = Math.floor(Math.random() * 5) + 1; // 1-5
+    
+    var criticScore = Math.floor(Math.random() * 5) + 1; 
     document.getElementById('compareScores').style.display = 'block';
     document.getElementById('criticScore').innerText = criticScore;
     document.getElementById('audienceCompareScore').innerText = selectedStars;

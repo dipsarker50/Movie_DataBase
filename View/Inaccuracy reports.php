@@ -1,0 +1,200 @@
+<?php
+session_start();
+$username = $_SESSION['username'];
+if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
+    $key = 'Login';
+}else{
+    $key = 'Profile';
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inaccuracy Reports (Simple)</title>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #fff;
+    }
+    header {
+      background-color: #f5c518;
+      padding: 10px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav {
+      background-color: #333;
+    }
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 14px 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    nav button:hover {
+      background-color: #555;
+    }
+    .section {
+      display: none;
+      padding: 20px;
+    }
+    .active {
+      display: block;
+    }
+    .form-group {
+      margin-bottom: 10px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    .report {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .moderator-actions button {
+      margin-right: 5px;
+      padding: 5px 10px;
+    }
+  </style>
+
+
+</head>
+<body>
+
+<header>Inaccuracy Reports</header>
+
+<nav>
+  <button onclick="showSection('submission')">Submit Error</button>
+  <button onclick="showSection('log')">My Corrections</button>
+  <button onclick="showSection('moderator')">Moderator Dashboard</button>
+</nav>
+
+<div id="submission" class="section active">
+  <h2>Submit an Inaccuracy</h2>
+  <div class="form-group">
+    <label>Title:</label>
+    <input type="text" id="title">
+  </div>
+  <div class="form-group">
+    <label>Type:</label>
+    <select id="type">
+      <option>Cast</option>
+      <option>Date</option>
+      <option>Fact</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Description:</label>
+    <textarea id="description"></textarea>
+  </div>
+  <button onclick="submitReport()">Submit</button>
+</div>
+
+<div id="log" class="section">
+  <h2>My Corrections</h2>
+  <div id="reportDisplay"></div>
+</div>
+
+<div id="moderator" class="section">
+  <h2>Moderator Dashboard</h2>
+  <div id="moderatorDisplay"></div>
+</div>
+
+<script>
+  // Variables to hold one report
+  var reportTitle = "";
+  var reportType = "";
+  var reportDescription = "";
+  var reportStatus = "None";
+  var points = 0;
+
+  function showSection(sectionId) {
+    var sections = document.getElementsByClassName('section');
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].id === sectionId) {
+        sections[i].classList.add('active');
+      } else {
+        sections[i].classList.remove('active');
+      }
+    }
+    if (sectionId === 'log') {
+      showReport();
+    }
+    if (sectionId === 'moderator') {
+      showModerator();
+    }
+  }
+
+  function submitReport() {
+    var t = document.getElementById('title').value;
+    var ty = document.getElementById('type').value;
+    var d = document.getElementById('description').value;
+    
+    if (t === "" || d === "") {
+      alert("Please fill in all fields.");
+    } else {
+      reportTitle = t;
+      reportType = ty;
+      reportDescription = d;
+      reportStatus = "Pending";
+      alert("Report submitted!");
+      document.getElementById('title').value = "";
+      document.getElementById('type').value = "Cast";
+      document.getElementById('description').value = "";
+    }
+  }
+
+  function showReport() {
+    var display = document.getElementById('reportDisplay');
+    if (reportStatus === "None") {
+      display.innerHTML = "No reports submitted.";
+    } else {
+      display.innerHTML = "<div class='report'><b>" + reportTitle + "</b> (" + reportType + ")<br>" +
+                          reportDescription + "<br>Status: " + reportStatus + "<br>Points: " + points + "</div>";
+    }
+  }
+
+  function showModerator() {
+    var mod = document.getElementById('moderatorDisplay');
+    if (reportStatus === "Pending") {
+      mod.innerHTML = "<div class='report'><b>" + reportTitle + "</b> (" + reportType + ")<br>" +
+                      reportDescription + "<br>" +
+                      "<button onclick='approveReport()'>Approve</button> " +
+                      "<button onclick='rejectReport()'>Reject</button></div>";
+    } else {
+      mod.innerHTML = "No pending reports.";
+    }
+  }
+
+  function approveReport() {
+    if (reportStatus === "Pending") {
+      reportStatus = "Approved";
+      points = points + 10;
+      alert("Report approved! +10 points.");
+      showModerator();
+      showReport();
+    }
+  }
+
+  function rejectReport() {
+    if (reportStatus === "Pending") {
+      reportStatus = "Rejected";
+      alert("Report rejected.");
+      showModerator();
+      showReport();
+    }
+  }
+</script>
+
+</body>
+</html>

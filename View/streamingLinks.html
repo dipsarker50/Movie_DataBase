@@ -1,7 +1,18 @@
+<?php
+session_start();
+$username = $_SESSION['username'];
+if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
+    $key = 'Login';
+}else{
+    $key = 'Profile';
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IMDb Clone - Streaming Links</title>
+  <title>Streaming Links</title>
   <link rel="stylesheet" href="streamingLinks.css">
 </head>
 <body>
