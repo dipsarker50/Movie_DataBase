@@ -9,6 +9,26 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 
 ?>
 
+<script>
+
+let movies = [];
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch('../controller/allMovie.php')
+          .then(response => response.json())
+          .then(data => {
+            loadMovies(data);
+            movies = data;
+            
+          })
+          .catch(error => {
+            console.error('Error loading movies:', error);
+          });
+        loadMovies(movies); 
+      });
+
+
+</script>
+
 <!DOCTYPE html>
 <html>
 <head>

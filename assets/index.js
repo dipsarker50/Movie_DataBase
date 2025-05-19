@@ -205,21 +205,7 @@ function searchBoxVaild(){
     //     { title: "In the Lost Lands", genre: ["Adventure", "Action"], status: "Released", date: "2025-02-27", poster: "https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" }
     //   ];
 
-    let movies = [];
-      document.addEventListener("DOMContentLoaded", () => {
-        fetch('../controller/allMovie.php')
-          .then(response => response.json())
-          .then(data => {
-            loadMovies(data);
-            movies = data;
-            
-          })
-          .catch(error => {
-            console.error('Error loading movies:', error);
-          });
-      });
-
-      
+    
 
       function loadMovies(list) {
         console.log(list);
@@ -237,38 +223,7 @@ function searchBoxVaild(){
           `;
         });
       }
-      let tv=[];
-      document.addEventListener("DOMContentLoaded", () => {
-        fetch('../controller/allTvShow.php')
-        .then(response => response.json())
-        .then(data => {
-          console.log("TV Shows:", data);
-          loadTvShows(data); 
-          tv = data;
-        })
-        .catch(error => {
-          console.error("Error fetching TV shows:", error);
-        });
-     });
 
-      function loadTvShows(list) {
-        console.log(list);
-        const grid = document.getElementById('moviesGrid');
-        grid.innerHTML = '';
-      
-        list.forEach(movie => {
-          grid.innerHTML += `
-            <a href="../controller/movieDetailController.php?title=${encodeURIComponent(movie.title)}" style="text-decoration:none; color:inherit;">
-              <div class="movie-card">
-                <img src="${movie.poster}" alt="${movie.title}">
-                <p>${movie.title}</p>
-              </div>
-            </a>
-          `;
-        });
-      }
-      
-      
       function applyFilters() {
         const searchText = document.getElementById('searchInput').value.toLowerCase();
         const selectedGenres = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(checkbox => checkbox.value);
@@ -297,6 +252,26 @@ function searchBoxVaild(){
       
         loadMovies(filteredMovies);
       }
+
+      
+
+      function loadTvShows(list) {
+        console.log(list);
+        const grid = document.getElementById('moviesGrid');
+        grid.innerHTML = '';
+      
+        list.forEach(tv => {
+          grid.innerHTML += `
+            <a href="../controller/tvShowDetailsController.php?title=${encodeURIComponent(tv.title)}" style="text-decoration:none; color:inherit;">
+              <div class="movie-card">
+                <img src="${tv.poster_url}" alt="${tv.title}">
+                <p>${tv.title}</p>
+              </div>
+            </a>
+          `;
+        });
+      }
+      
 
 
       function applyFiltersTv() {
@@ -361,4 +336,8 @@ function searchBoxVaild(){
 
   function goMovie() {
     window.location.href = "movie.php";
+  }
+
+  function goTvShow() {
+    window.location.href = "tv_show.php";
   }

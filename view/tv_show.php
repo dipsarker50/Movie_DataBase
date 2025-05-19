@@ -7,7 +7,30 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
     $key = 'Profile';
 }
 
+
+
 ?>
+
+<script>
+let tv=[];
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch('../controller/allTvShow.php')
+        .then(response => response.json())
+        .then(data => {
+          console.log("TV Shows:", data);
+          loadTvShows(data); 
+          tv = data;
+        })
+        .catch(error => {
+          console.error("Error fetching TV shows:", error);
+        });
+
+        loadTvShows(tv);
+     });
+
+
+</script>
+
 
 <!DOCTYPE html>
 <html>
@@ -62,7 +85,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <!-- Search bar -->
 <div class="search-bar">
   <input type="text" id="searchInput" placeholder="Search tvshow name...">
-  <button onclick="applyFilters()">Search</button>
+  <button onclick="applyFiltersTv()">Search</button>
 </div>
 
 <div class="main-content">
@@ -85,7 +108,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
     <input type="date" id="fromDate">
     <input type="date" id="toDate">
 
-    <button onclick="applyFilters()">Apply Filter</button>
+    <button onclick="applyFiltersTv()">Apply Filter</button>
   </div>
 
   <div class="movies-grid" id="moviesGrid">
