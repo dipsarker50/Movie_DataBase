@@ -30,13 +30,13 @@ if (!isset($_SESSION['loggedin'])) {
   <div id="details"></div>
 
   <script>
-    // Function to show details based on widget clicked
+    
     function showDetail(type) {
       let detailsDiv = document.getElementById("details");
       detailsDiv.innerHTML = `<h3>${type} Details</h3><p>Here you can see details about ${type}.</p>`;
     }
 
-    // Function to handle quick actions like Add Movie, Manage Users, etc.
+    
     function quickAction(action) {
       let detailsDiv = document.getElementById("details");
       detailsDiv.innerHTML = `<h3>${action}</h3><p>Performing the action: ${action}. More options will be added here.</p>`;

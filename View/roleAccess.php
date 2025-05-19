@@ -17,7 +17,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 </head>
 <body>
 
-  <h1>IMDb Clone</h1>
+  <h1>Movie Database</h1>
 
   <label for="role">Choose Role:</label>
   <select id="role">

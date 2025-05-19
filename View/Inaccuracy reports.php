@@ -111,7 +111,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 </div>
 
 <script>
-  // Variables to hold one report
+  
   var reportTitle = "";
   var reportType = "";
   var reportDescription = "";
