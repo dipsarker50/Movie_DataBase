@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +12,13 @@
 
 <body class="login_body">
   <div class="login">
-    <p id="error"></p>
-    <form onsubmit="validateSignInForm()" action="../controller/login_check.php" method="post">
+    <p id="error"><?php
+        if (isset($_SESSION['loginError'])) {
+            echo $_SESSION['loginError'];
+            unset($_SESSION['loginError']);
+        }
+      ?></p>
+    <form onsubmit="return validateSignInForm()" action="../controller/login_check.php" method="post">
       <fieldset>
         <legend>Login</legend>
         <table>
@@ -32,7 +41,7 @@
       </fieldset>
     </form>
     <div id="navigation_login">
-        New to IMDb? <a href="../view/SignUp.html">SignUp</a> <br>
+        New to IMDb? <a href="../view/SignUp.php">SignUp</a> <br>
         Forget Password? <a href="../view/forget_password.html">Reset</a>
     </div>
   </div>
