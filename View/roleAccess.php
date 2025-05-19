@@ -13,7 +13,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <html>
 <head>
   <title>Role Based Access</title>
-  <link rel="stylesheet" href="roleAccess.css">
+  <link rel="stylesheet" href="../Asset/roleAccess.css">
 </head>
 <body>
 

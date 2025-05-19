@@ -10,7 +10,7 @@ if (!isset($_SESSION['loggedin'])) {
 <html>
 <head>
   <title>Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="../Asset/dashboard.css">
 </head>
 <body>
 

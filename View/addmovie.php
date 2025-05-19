@@ -13,7 +13,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <html>
 <head>
   <title>Add Movie (PHP)</title>
-  <link rel="stylesheet" href="addMovie.css">
+  <link rel="stylesheet" href="../Asset/addMovie.css">
 </head>
 <body>
 

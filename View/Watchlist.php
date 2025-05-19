@@ -13,7 +13,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <head>
   <meta charset="UTF-8">
   <title>Watchlist Manager</title>
-  <link rel="stylesheet" href="watchlist.css">
+  <link rel="stylesheet" href="../Asset/watchlist.css">
 </head>
 <body>
 

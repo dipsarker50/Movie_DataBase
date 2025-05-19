@@ -13,7 +13,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <head>
   <meta charset="UTF-8">
   <title>Inaccuracy Reports (Simple)</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../Asset/Inaccuracy reports.css">
 </head>
 <body>
 

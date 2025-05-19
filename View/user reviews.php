@@ -13,7 +13,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <head>
     <meta charset="UTF-8">
     <title>User Reviews</title>
-    <link rel="stylesheet" href="review.css">
+    <link rel="stylesheet" href="../Asset/user reviews.css">
 </head>
 <body>
 

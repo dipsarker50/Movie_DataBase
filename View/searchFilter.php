@@ -13,7 +13,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <html>
 <head>
   <title>Search</title>
-  <link rel="stylesheet" href="searchFilter.css">
+  <link rel="stylesheet" href="../Asset/searchFilter.css">
 </head>
 <body>
 
