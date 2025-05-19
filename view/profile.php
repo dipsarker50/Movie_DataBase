@@ -21,6 +21,9 @@ if($_SESSION['called']){
   header('Location: login.php');
  
 }
+// if( $_SESSION['error']){
+//   header('Location: login.php');
+// }
 
 ?>
 <!DOCTYPE html>

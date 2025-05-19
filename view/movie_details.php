@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
-    header('location: ../view/login.html');
-    exit();
-}
 $movie = $_SESSION['movie'];
 ?>
 
