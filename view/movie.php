@@ -35,49 +35,38 @@ let movies = [];
   <meta charset="UTF-8">
   <title>Movies</title>
   <link rel="stylesheet" href="../assets/movie.css">
+  <link rel="stylesheet" href="../assets/navbar.css">
   <script src="../assets/index.js"></script>
 </head>
 <body>
 
         
 
-<nav style="background-color: #f5c518; padding: 15px 30px; display: flex; align-items: center; justify-content: space-between; font-family: Arial, sans-serif;">
-        <div class="logo">
-            <a href="../index.php" style="font-weight: bold; font-size: 24px; text-decoration: none; color: black;">MovieDB</a>
+<nav class="navbar">
+  <div class="logo">
+    <a href="../index.php">MovieDB</a>
+  </div>
+
+  <div class="menu">
+    <a href="../index.php">Home</a>
+    <a href="#">Movies</a>
+    <a href="tv_show.php">TV Shows</a>
+
+    <?php if (strtolower($key) === 'profile') { ?>
+      <div class="dropdown">
+        <a href="#" class="dropbtn"><?= $key ?></a>
+        <div class="dropdown-content">
+          <a href="profile.php"><?= $username ?></a>
+          <a href="#">My watchList</a>
+          <a href="controller/logout.php">Logout</a>
         </div>
-
-        <div class="menu" style="display: flex; align-items: center; gap: 20px;">
-            <a href="../index.php" style="text-decoration: none; color: black; font-weight: bold; padding: 8px 12px; border-radius: 4px;">Home</a>
-            <a href="#" style="text-decoration: none; color: black; font-weight: bold; padding: 8px 12px; border-radius: 4px;">Movies</a>
-            <a href="tv_show.php" style="text-decoration: none; color: black; font-weight: bold; padding: 8px 12px; border-radius: 4px;">TV Shows</a>
-
-            <?php if (strtolower($key) === 'profile'){ ?>
-            <div class="dropdown" style="position: relative;">
-            <a href="#" class="dropbtn" style="text-decoration: none; color: black; font-weight: bold; padding: 8px 12px; border-radius: 4px; cursor: pointer;"><?= $key ?></a>
-
-            
-                <div class="dropdown-content" style="display: none; position: absolute; top: 110%; right: 0; background-color: white; min-width: 160px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); border-radius: 4px; z-index: 1000;">
-                <a href="profile.php" style="display: block; padding: 10px 16px; text-decoration: none; color: black; font-weight: normal;"><?= htmlspecialchars($username) ?></a>
-                <a href="#" style="display: block; padding: 10px 16px; text-decoration: none; color: black; font-weight: normal;">My watchList</a>
-                <a href="controller/logout.php" style="display: block; padding: 10px 16px; text-decoration: none; color: black; font-weight: normal;">Logout</a>
-                </div>
-
-                <script>
-                const dropdown = document.querySelector('.dropdown');
-                const content = dropdown.querySelector('.dropdown-content');
-                dropdown.addEventListener('mouseenter', () => {
-                    content.style.display = 'block';
-                });
-                dropdown.addEventListener('mouseleave', () => {
-                    content.style.display = 'none';
-                });
-                </script>
-            <?php }else {; ?>
-                <a href="login.php" style="text-decoration: none; color: black; font-weight: bold; padding: 8px 12px; border-radius: 4px;"><?= $key ?></a>
-            <?php }; ?>
-            </div>
-        </div>
+      </div>
+    <?php } else { ?>
+      <a href="login.php"><?= $key ?></a>
+    <?php } ?>
+  </div>
 </nav>
+
 
 <div class="search-bar">
   <input type="text" id="searchInput" placeholder="Search movie name...">

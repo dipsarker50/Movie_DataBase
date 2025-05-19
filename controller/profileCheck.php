@@ -15,17 +15,36 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $name = trim($_POST['name']);
 $phone = trim($_POST['phone']);
-$image_path = $user['image_path'];
+$image_path = '';
+$_SESSION['upload_status']='';
+
+if (empty($name) || empty($phone)) {
+    $_SESSION['upload_status'] = "Name and phone cannot be empty.";
+    header('Location: ../view/profile.php');
+    exit();
+}
+
+if (!preg_match('/^01[3-9][0-9]{8}$/', $phone)) {
+    $_SESSION['upload_status'] = "Invalid phone number.Only Bangladeshi Number Accepted";
+    header('Location: ../view/profile.php');
+    exit();
+}
 
 
 if (isset($_FILES['uploadPic']) && $_FILES['uploadPic']['error'] === UPLOAD_ERR_OK) {
         $src = $_FILES['uploadPic']['tmp_name'];
         $ext = explode('.', $_FILES['uploadPic']['name']);
         $des = '../assets/upload/' . $_SESSION['username'].'.'.$ext[1];
+        if (move_uploaded_file($src, $des)) {
+            $image_path = $des;
+        } else {
+            $user = getUserByEmail($_SESSION['email']);
+            $image_path = $user ? $user['image_path'] : '';
+        }
+}
 
-    if (move_uploaded_file($src, $des)) {
-        $image_path = $des;
-    }
+if ($image_path == '') {
+    $image_path = getUserByEmail($_SESSION['username'])['image_path'];
 }
 
 
@@ -33,3 +52,10 @@ updateUserProfile($_SESSION['username'], $name, $phone, $image_path);
 
 header('Location: ../view/profile.php');
 exit();
+
+
+
+
+
+
+
