@@ -14,15 +14,6 @@ if (!$movie) {
     exit();
 }
 
-// echo json_encode([
-//     'title' => $movie['title'],
-//     'genre' => $movie['genre'],
-//     'status' => $movie['status'],
-//     'release_date' => $movie['release_date'],
-//     'poster' => $movie['poster_url']
-// ]);
-
-
 session_start();
 $_SESSION['movie'] =$movie;
 

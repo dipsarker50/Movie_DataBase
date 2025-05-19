@@ -14,6 +14,7 @@ $user = getUserByEmail($username);
 $name = $user['name'];
 $image_path = $user['image_path'];
 $phone = $user['phone'];
+$status = $_SESSION['upload_status'];
 
 if($_SESSION['called']){
   
@@ -41,10 +42,10 @@ if($_SESSION['called']){
   <button type="button" onclick="goBack()" style="margin-top: 10px;">Back</button>
     <h2>User Profile</h2>
     <form id="profileForm"  action="../controller/profileCheck.php" method="post" enctype="multipart/form-data">
-      <p id="error" style="color: green;"><?= $status ?></p>
+      <p id="error" style="color: red;"><?= $status ?></p>
 
       <div class="profile_picture_section">
-        <img id="profilePic" src="<?= $image_path ?>" alt="Profile Picture" style="width: 120px; height: 120px; object-fit: cover; border-radius: 60px;" />
+        <img id="profilePic" src="<?=$image_path?>" alt="Profile Picture" style="width: 120px; height: 120px; object-fit: cover; border-radius: 60px;" />
         <input type="file" id="uploadPic" name="uploadPic" accept="image/*" onchange="previewProfilePic()" style="display: none;" />
       </div>
    

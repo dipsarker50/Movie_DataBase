@@ -1,6 +1,6 @@
 <?php
 session_start();
-$movie = $_SESSION['movie'];
+$tvshow = $_SESSION['tvshow'];
 ?>
 
 
@@ -12,23 +12,23 @@ $movie = $_SESSION['movie'];
 
 <head>
     <meta charset="UTF-8">
-    <title>Movie Details - <?= $movie['title'] ?></title>
+    <title>TvShow Details - <?= $tvshow['title'] ?></title>
     <link rel="stylesheet" href="../assets/style.css">
     <script src="../assets/index.js"></script>
 </head>
 
 <body>
-<button type="button" onclick="goMovie()" style="margin-top: 10px;">Back</button>
+<button type="button" onclick="goTvShow()" style="margin-top: 10px;">Back</button>
 
     <div class="movie-header">
         <div class="poster">
-            <img src="<?= $movie['poster_url'] ?>" alt="<?= $movie['title'] ?>">
+            <img src="<?= $tvshow['poster_url'] ?>" alt="<?= $tvshow['title'] ?>">
         </div>
 
         <div class="movie-info">
-            <h1><?= $movie['title'] ?></span></h1>
+            <h1><?= $tvshow['title'] ?></h1>
             <div class="sub-info">
-                18+ | <?= $movie['release_date'] ?>  | <?= $movie['genre'] ?>  | 1h 45m
+                18+ | <?= $tvshow['release_date'] ?>  | <?= $tvshow['genre'] ?>  | 1h 45m
             </div>
 
             <div class="user-score">
