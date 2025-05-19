@@ -17,15 +17,16 @@ function login($user) {
     return false;
 }
 
-function getUserById($id) {
+function getUserByEmail($email) {
     $con = getConnection();
-    $id = mysqli_real_escape_string($con, $id);
+    $email = mysqli_real_escape_string($con, $email);
 
-    $sql = "SELECT * FROM users WHERE id='$id'";
+    $sql = "SELECT * FROM users WHERE email='$email'";
     $result = mysqli_query($con, $sql);
 
     return ($result && mysqli_num_rows($result) === 1) ? mysqli_fetch_assoc($result) : null;
 }
+
 
 function getAllUser() {
     $con = getConnection();
@@ -53,11 +54,12 @@ function addUser($user) {
 
     $name = mysqli_real_escape_string($con, $u['name']);
     $email = mysqli_real_escape_string($con, $u['email']);
+    $phone = mysqli_real_escape_string($con, $u['phone']);
     $password    = password_hash($u['password'], PASSWORD_DEFAULT);
     $image_path = mysqli_real_escape_string($con, $u['image_path']);
 
-    $sql = "INSERT INTO users (name, email, password, image_path)
-            VALUES ('$name', '$email', '$password', '$image_path')";
+    $sql = "INSERT INTO users (name, email, phone, password, image_path)
+            VALUES ('$name', '$email', '$phone', '$password', '$image_path')";
 
     return mysqli_query($con, $sql);
 }
@@ -94,5 +96,19 @@ function emailExists($email) {
     
         return mysqli_num_rows($result) > 0;
 }
+
+function updateUserProfile($email, $name, $phone, $image_path) {
+    $con = getConnection();
+    $email = mysqli_real_escape_string($con, $email);
+    $name = mysqli_real_escape_string($con, $name);
+    $phone = mysqli_real_escape_string($con, $phone);
+    $image_path = mysqli_real_escape_string($con, $image_path);
+
+    $sql = "UPDATE users SET name='$name', phone='$phone', image_path='$image_path' WHERE email='$email'";
+    $execution=mysqli_query($con, $sql);
+    // $_SESSION['called']=$execution;
+    return $execution;
+}
+
     
 ?>

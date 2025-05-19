@@ -17,7 +17,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
   <link rel="stylesheet" href="../assets/movie.css">
   <script src="../assets/index.js"></script>
 </head>
-<body onload="loadMovies()">
+<body>
 
         
 
@@ -37,7 +37,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 
             
                 <div class="dropdown-content" style="display: none; position: absolute; top: 110%; right: 0; background-color: white; min-width: 160px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); border-radius: 4px; z-index: 1000;">
-                <a href="view/profile.php" style="display: block; padding: 10px 16px; text-decoration: none; color: black; font-weight: normal;"><?= htmlspecialchars($username) ?></a>
+                <a href="profile.php" style="display: block; padding: 10px 16px; text-decoration: none; color: black; font-weight: normal;"><?= htmlspecialchars($username) ?></a>
+                <a href="#" style="display: block; padding: 10px 16px; text-decoration: none; color: black; font-weight: normal;">My watchList</a>
                 <a href="controller/logout.php" style="display: block; padding: 10px 16px; text-decoration: none; color: black; font-weight: normal;">Logout</a>
                 </div>
 
@@ -92,7 +93,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 
 </div>
 
-<!-- Footer -->
 <footer style="background-color: #1a1a1a; color: white; padding: 40px 20px; margin-top: 50px;">
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; max-width: 1200px; margin: auto;">
 

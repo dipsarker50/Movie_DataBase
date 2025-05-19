@@ -147,37 +147,42 @@ function vaildateResetPass(){
 }
 
 function toggleEdit() {
-        const isDisabled = document.getElementById("name").disabled;
-        const fields = ["name", "email", "phone"];
-        const button = document.getElementById("toggleBtn");
-        const fileInput = document.getElementById("uploadPic");
-      
-        fields.forEach(id => {
-          document.getElementById(id).disabled = !isDisabled;
-        });
-      
-        fileInput.style.display = isDisabled ? "block" : "none";
-        button.textContent = isDisabled ? "Save" : "Edit";
-        document.getElementsByName("name")[0].value = isDisabled ? "save" : "";
-      
-        if (!isDisabled) {
-          alert("Profile saved!");
-        }
-      }
-      
+  const nameField = document.getElementById("name");
+  const phoneField = document.getElementById("phone");
+  const emailField = document.getElementById("email"); 
+  const fileInput = document.getElementById("uploadPic");
+  const button = document.getElementById("toggleBtn");
+  const form = document.getElementById("profileForm");
+
+  if (button.textContent === "Edit") {
+    nameField.readOnly = false;
+    phoneField.readOnly = false;
+    fileInput.style.display = "block";
+    button.textContent = "Save";
+    return true;
+  } else {
+    nameField.readOnly = false;
+    phoneField.readOnly = false;
+    form.submit();
+    return false;
+  }
+}
+
+
+
 
 function previewProfilePic() {
-        const fileInput = document.getElementById('uploadPic');
-        const profilePic = document.getElementById('profilePic');
-      
-        const file = fileInput.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function (e) {
-            profilePic.src = e.target.result;
-          };
-          reader.readAsDataURL(file);
-        }
+  const fileInput = document.getElementById('uploadPic');
+  const profilePic = document.getElementById('profilePic');
+
+  const file = fileInput.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      profilePic.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
 }
 
 function searchBoxVaild(){
@@ -192,29 +197,77 @@ function searchBoxVaild(){
         return true;
 }
 
-     const movies = [
-        { title: "A Working Man", genre: ["Action", "Drama"], status: "Released", date: "2025-03-26", poster: "https://image.tmdb.org/t/p/w500/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg" },
-        { title: "Havoc", genre: ["Action", "Crime"], status: "Released", date: "2025-04-25", poster: "https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" },
-        { title: "Minecraft Movie", genre: ["Animation", "Adventure"], status: "Upcoming", date: "2025-03-31", poster: "https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" },
-        { title: "Bullet Train Explosion", genre: ["Action"], status: "Released", date: "2025-04-23", poster: "https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg" },
-        { title: "In the Lost Lands", genre: ["Adventure", "Action"], status: "Released", date: "2025-02-27", poster: "https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" }
-      ];
+    //  const movies = [
+    //     { title: "A Working Man", genre: ["Action", "Drama"], status: "Released", date: "2025-03-26", poster: "https://image.tmdb.org/t/p/w500/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg" },
+    //     { title: "Havoc", genre: ["Action", "Crime"], status: "Released", date: "2025-04-25", poster: "https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" },
+    //     { title: "Minecraft Movie", genre: ["Animation", "Adventure"], status: "Upcoming", date: "2025-03-31", poster: "https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" },
+    //     { title: "Bullet Train Explosion", genre: ["Action"], status: "Released", date: "2025-04-23", poster: "https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg" },
+    //     { title: "In the Lost Lands", genre: ["Adventure", "Action"], status: "Released", date: "2025-02-27", poster: "https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" }
+    //   ];
+
+    let movies = [];
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch('../controller/allMovie.php')
+          .then(response => response.json())
+          .then(data => {
+            loadMovies(data);
+            movies = data;
+            
+          })
+          .catch(error => {
+            console.error('Error loading movies:', error);
+          });
+      });
+
       
-      // Load movies on page
-      function loadMovies(list = movies) {
+
+      function loadMovies(list) {
+        console.log(list);
         const grid = document.getElementById('moviesGrid');
         grid.innerHTML = '';
       
         list.forEach(movie => {
           grid.innerHTML += `
-                <a href="movie_details.php?title=${encodeURIComponent(movie.title)}" style="text-decoration:none; color:inherit;">
-            <div class="movie-card">
-              <img src="${movie.poster}" alt="${movie.title}">
-              <p>${movie.title}</p>
-            </div>
+            <a href="../controller/movieDetailController.php?title=${encodeURIComponent(movie.title)}" style="text-decoration:none; color:inherit;">
+              <div class="movie-card">
+                <img src="${movie.poster}" alt="${movie.title}">
+                <p>${movie.title}</p>
+              </div>
+            </a>
           `;
         });
       }
+      let tv=[];
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch('../controller/allTvShow.php')
+        .then(response => response.json())
+        .then(data => {
+          console.log("TV Shows:", data);
+          loadTvShows(data); 
+          tv = data;
+        })
+        .catch(error => {
+          console.error("Error fetching TV shows:", error);
+        });
+     });
+
+      function loadTvShows(list) {
+        console.log(list);
+        const grid = document.getElementById('moviesGrid');
+        grid.innerHTML = '';
+      
+        list.forEach(movie => {
+          grid.innerHTML += `
+            <a href="../controller/movieDetailController.php?title=${encodeURIComponent(movie.title)}" style="text-decoration:none; color:inherit;">
+              <div class="movie-card">
+                <img src="${movie.poster}" alt="${movie.title}">
+                <p>${movie.title}</p>
+              </div>
+            </a>
+          `;
+        });
+      }
+      
       
       function applyFilters() {
         const searchText = document.getElementById('searchInput').value.toLowerCase();
@@ -244,30 +297,68 @@ function searchBoxVaild(){
       
         loadMovies(filteredMovies);
       }
+
+
+      function applyFiltersTv() {
+        const searchText = document.getElementById('searchInput').value.toLowerCase();
+        const selectedGenres = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(checkbox => checkbox.value);
+        const selectedStatus = document.querySelector('input[name="status"]:checked').value;
+        const fromDate = document.getElementById('fromDate').value;
+        const toDate = document.getElementById('toDate').value;
       
-      // Initial Load
-      document.addEventListener('DOMContentLoaded', () => {
-        loadMovies();
-      });
+        let filteredMovies = tv.filter(movie => {
+          if (searchText && !movie.title.toLowerCase().includes(searchText)) {
+            return false;
+          }
+          if (selectedGenres.length > 0 && !selectedGenres.some(genre => movie.genre.includes(genre))) {
+            return false;
+          }
+          if (selectedStatus !== "All" && movie.status !== selectedStatus) {
+            return false;
+          }
+          if (fromDate && movie.date < fromDate) {
+            return false;
+          }
+          if (toDate && movie.date > toDate) {
+            return false;
+          }
+          return true;
+        });
+      
+        loadTvShows(filteredMovies);
+      }
+      
+      // document.addEventListener('DOMContentLoaded', () => {
+      //   loadMovies();
+      // });
 
 
-    //   function updateCountdown() {
-    //     const releaseDate = new Date("May 29, 2025 00:00:00").getTime(); // Release Time
-    //     const now = new Date().getTime();
-    //     const distance = releaseDate - now;
+      function updateCountdown() {
+        const releaseDate = new Date("May 29, 2025 00:00:00").getTime(); // Release Time
+        const now = new Date().getTime();
+        const distance = releaseDate - now;
 
-    //     if (distance < 0) {
-    //         document.getElementById("countdown").innerHTML = "Released!";
-    //         return;
-    //     }
+        if (distance < 0) {
+            document.getElementById("countdown").innerHTML = "Released!";
+            return;
+        }
 
-    //     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    //     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    //     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    //     //document.getElementById("countdown").innerHTML =`${days}d ${hours}h ${minutes}m ${seconds}s`;
-    // }
+        //document.getElementById("countdown").innerHTML =`${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
 
     setInterval(updateCountdown, 1000);
           
+
+
+  function goBack() {
+    window.location.href = "../index.php";
+  }
+
+  function goMovie() {
+    window.location.href = "movie.php";
+  }

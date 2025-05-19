@@ -4,6 +4,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
     header('location: ../view/login.html');
     exit();
 }
+$movie = $_SESSION['movie'];
 ?>
 
 
@@ -12,22 +13,23 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Movie Details - Havoc</title>
+    <title>Movie Details - <?= $movie['title'] ?></title>
     <link rel="stylesheet" href="../assets/style.css">
     <script src="../assets/index.js"></script>
 </head>
 
 <body>
+<button type="button" onclick="goMovie()" style="margin-top: 10px;">Back</button>
 
     <div class="movie-header">
         <div class="poster">
-            <img src="https://image.tmdb.org/t/p/w500/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg" alt="Havoc">
+            <img src="<?= $movie['poster_url'] ?>" alt="<?= $movie['title'] ?>">
         </div>
 
         <div class="movie-info">
-            <h1>Havoc <span style="font-weight: normal;">(2025)</span></h1>
+            <h1><?= $movie['title'] ?> <span style="font-weight: normal;">(2025)</span></h1>
             <div class="sub-info">
-                18+ | 04/25/2025 (BD) | Action, Crime, Thriller | 1h 45m
+                18+ | <?= $movie['release_date'] ?>  | <?= $movie['genre'] ?>  | 1h 45m
             </div>
 
             <div class="user-score">

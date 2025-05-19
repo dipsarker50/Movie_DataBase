@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
 
     if (login($user)) {
-        $_SESSION['status'] = true;
+        $_SESSION['status']=true;
         $_SESSION['username'] = $email;
         header('Location: ../index.php');
         exit();

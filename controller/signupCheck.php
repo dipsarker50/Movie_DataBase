@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         0 => [
             'name'        => $_POST['name'],
             'email'       => $email,
+            'phone'  => '' ,
             'password'    => $_POST['password'],
             'image_path'  => ''
         ]
