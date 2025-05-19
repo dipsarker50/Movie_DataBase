@@ -193,7 +193,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 
             <div>
                 <h4>Community</h4>
-                <p>Discussions</p>
+                <a href="view/trivia.html">Discussions</a>
                 <p>Leaderboard</p>
             </div>
 

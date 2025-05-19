@@ -64,10 +64,6 @@ function validateSignInForm() {
         }
         error.textContent="";
   
-<<<<<<< HEAD
-        window.location.href = "dashboard.html";
-=======
->>>>>>> Dip-Sarker
         return true;
 }
 
