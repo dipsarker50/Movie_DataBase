@@ -12,8 +12,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Search</title>
-  <link rel="stylesheet" href="../Asset/searchFilter.css">
+<title>Search</title>
+<link rel="stylesheet" href="../Asset/searchFilter.css">
 </head>
 <body>
 

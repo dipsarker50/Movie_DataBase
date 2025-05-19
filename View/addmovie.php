@@ -12,8 +12,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Add Movie (PHP)</title>
-  <link rel="stylesheet" href="../Asset/addMovie.css">
+<title>Add Movie (PHP)</title>
+<link rel="stylesheet" href="../Asset/addMovie.css">
 </head>
 <body>
 
@@ -26,17 +26,17 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 
     <label>Genre:</label>
     <select name="genre[]" id="genre" multiple required>
-      <option>Action</option>
-      <option>Drama</option>
-      <option>Crime</option>
-      <option>Adventure</option>
-      <option>Animation</option>
+    <option>Action</option>
+    <option>Drama</option>
+    <option>Crime</option>
+    <option>Adventure</option>
+    <option>Animation</option>
     </select>
 
     <label>Status:</label>
     <select name="status" id="status" required>
-      <option>Released</option>
-      <option>Upcoming</option>
+    <option>Released</option>
+    <option>Upcoming</option>
     </select>
 
     <label>Release Date:</label>

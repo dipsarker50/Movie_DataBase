@@ -9,17 +9,17 @@ if (!isset($_SESSION['loggedin'])) {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="../Asset/dashboard.css">
+<title>Dashboard</title>
+<link rel="stylesheet" href="../Asset/dashboard.css">
 </head>
 <body>
 
   <h1>Welcome to the Dashboard, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
 
   <div id="summary">
-    <div class="widget" onclick="showDetail('Movies')">Total Movies: 120</div>
-    <div class="widget" onclick="showDetail('Users')">Total Users: 35</div>
-    <div class="widget" onclick="showDetail('Reviews')">Total Reviews: 210</div>
+  <div class="widget" onclick="showDetail('Movies')">Total Movies: 120</div>
+  <div class="widget" onclick="showDetail('Users')">Total Users: 35</div>
+  <div class="widget" onclick="showDetail('Reviews')">Total Reviews: 210</div>
   </div>
 
   <h2>Quick Actions</h2>
@@ -43,6 +43,6 @@ if (!isset($_SESSION['loggedin'])) {
     }
   </script>
 
-  <script src="dashboard.js"></script>
+<script src="dashboard.js"></script>
 </body>
 </html>

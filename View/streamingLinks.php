@@ -12,8 +12,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Streaming Links</title>
-  <link rel="stylesheet" href="../Asset/streamingLinks.css">
+<title>Streaming Links</title>
+<link rel="stylesheet" href="../Asset/streamingLinks.css">
 </head>
 <body>
 

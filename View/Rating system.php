@@ -11,9 +11,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Rating System</title>
-  <link rel="stylesheet" href="../Asset/Rating system.css">
+<meta charset="UTF-8">
+<title>Rating System</title>
+<link rel="stylesheet" href="../Asset/Rating system.css">
 </head>
 <body>
 

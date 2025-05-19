@@ -11,9 +11,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Inaccuracy Reports (Simple)</title>
-  <link rel="stylesheet" href="../Asset/Inaccuracy reports.css">
+<meta charset="UTF-8">
+<title>Inaccuracy Reports (Simple)</title>
+<link rel="stylesheet" href="../Asset/Inaccuracy reports.css">
 </head>
 <body>
 
@@ -34,9 +34,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
   <div class="form-group">
     <label>Type:</label>
     <select id="type">
-      <option>Cast</option>
-      <option>Date</option>
-      <option>Fact</option>
+    <option>Cast</option>
+    <option>Date</option>
+    <option>Fact</option>
     </select>
   </div>
   <div class="form-group">

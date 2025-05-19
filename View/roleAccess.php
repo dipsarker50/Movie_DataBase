@@ -21,9 +21,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 
   <label for="role">Choose Role:</label>
   <select id="role">
-    <option value="User">User</option>
-    <option value="Editor">Editor</option>
-    <option value="Admin">Admin</option>
+  <option value="User">User</option>
+  <option value="Editor">Editor</option>
+  <option value="Admin">Admin</option>
   </select>
 
   <div id="nav-bar"></div>
@@ -32,9 +32,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
     <p><strong>Admin Panel</strong></p>
     <input type="text" id="assign-user" placeholder="Username">
     <select id="assign-role">
-      <option value="User">User</option>
-      <option value="Editor">Editor</option>
-      <option value="Admin">Admin</option>
+    <option value="User">User</option>
+    <option value="Editor">Editor</option>
+    <option value="Admin">Admin</option>
     </select>
     <button onclick="assignRole()">Assign</button>
     <p id="assign-result"></p>
