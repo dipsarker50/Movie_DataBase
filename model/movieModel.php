@@ -74,4 +74,20 @@ function deleteMovie($id) {
     $sql = "DELETE FROM movies WHERE id='$id'";
     return mysqli_query($con, $sql);
 }
+
+function getTrendingMovies() {
+    $con = getConnection();
+    $sql = "SELECT * FROM movies ORDER BY views DESC LIMIT 3";
+    $result = mysqli_query($con, $sql);
+
+    $movies = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $movies[] = $row;
+    }
+
+    return $movies;
+}
+
+
+
 ?>

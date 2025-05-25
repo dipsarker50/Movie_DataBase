@@ -9,6 +9,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 
 ?>
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,66 +65,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
         <p id="searcherror"></p>
     </div>
 
-    <div class="trending-section">
-        <h2>Trending Movies</h2>
-        <div class="movie-slider">
+    <div class="trending-section" id="trending-section">
+  <h2>Trending Movies</h2>
+  <div class="movie-slider"></div>
+</div>
 
-            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
-            <div class="movie-card">
-                <div class="movie-image-wrapper">
-                    <img src="https://image.tmdb.org/t/p/w500/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg" alt="Movie 1">
-                </div>
-                <p>Movie Title 1</p>
-            </div>
-            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
-            <div class="movie-card">
-                <div class="movie-image-wrapper">
-                    <img src="https://image.tmdb.org/t/p/w500/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg" alt="Movie 2">
-                </div>
-                <p>Movie Title 2</p>
-            </div>
-
-            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
-            <div class="movie-card">
-                <div class="movie-image-wrapper">
-                    <img src="https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" alt="Movie 3">
-                </div>
-                <p>Movie Title 3</p>
-            </div>
-
-            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
-            <div class="movie-card">
-                <div class="movie-image-wrapper">
-                    <img src="https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg" alt="Movie 4">
-                </div>
-                <p>Movie Title 4</p>
-            </div>
-
-            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
-            <div class="movie-card">
-                <div class="movie-image-wrapper">
-                    <img src="https://image.tmdb.org/t/p/w500/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg" alt="Movie 2">
-                </div>
-                <p>Movie Title 2</p>
-            </div>
-
-            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
-            <div class="movie-card">
-                <div class="movie-image-wrapper">
-                    <img src="https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" alt="Movie 3">
-                </div>
-                <p>Movie Title 3</p>
-            </div>
-
-            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;">
-            <div class="movie-card">
-                <div class="movie-image-wrapper">
-                    <img src="https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg" alt="Movie 4">
-                </div>
-                <p>Movie Title 4</p>
-            </div>
-        </div>
-    </div>
 
 
     <div class="trending-section">
@@ -200,6 +148,23 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
                 dropdown.addEventListener('mouseleave', () => {
                     content.style.display = 'none';
                 });
+
+
+
+
+                let xhttp = new XMLHttpRequest();
+                xhttp.open('POST', 'controller/allMovie.php', true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        let movies = JSON.parse(this.responseText);
+                        const trending = movies.trending;
+                        displayTrendingMovies(trending);
+                    }
+                };
+
+
     </script>
 
 </body>

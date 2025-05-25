@@ -12,21 +12,16 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 ?>
 
 <script>
-let tv=[];
-      document.addEventListener("DOMContentLoaded", () => {
-        fetch('../controller/allTvShow.php')
-        .then(response => response.json())
-        .then(data => {
-          console.log("TV Shows:", data);
-          loadTvShows(data); 
-          tv = data;
-        })
-        .catch(error => {
-          console.error("Error fetching TV shows:", error);
-        });
-
-        loadTvShows(tv);
-     });
+  let xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '../controller/allTvShow.php', true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status === 200) {
+          let tv = JSON.parse(this.responseText);
+          loadTvShows(tv);
+      }
+  };
 
 
 </script>

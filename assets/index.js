@@ -302,6 +302,28 @@ function searchBoxVaild(){
       
         loadTvShows(filteredMovies);
       }
+
+
+
+      function displayTrendingMovies(list) {
+        const section = document.getElementById('trending-section');
+        const slider = section.querySelector('.movie-slider');
+        slider.innerHTML = '';
+      
+        list.forEach(movie => {
+          slider.innerHTML += `
+            <a href="view/movie_details.php?title=${encodeURIComponent(movie.title)}" style="text-decoration: none; color: inherit;">
+              <div class="movie-card">
+                <div class="movie-image-wrapper">
+                  <img src="${movie.poster}" alt="${movie.title}">
+                </div>
+                <p>${movie.title}</p>
+              </div>
+            </a>
+          `;
+        });
+      }
+      
       
       // document.addEventListener('DOMContentLoaded', () => {
       //   loadMovies();

@@ -1,8 +1,7 @@
 <?php
 require_once('../model/tvShowModel.php');
-header('Content-Type: application/json');
-
 $shows = getAllTVShows();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $tvList = array_map(function($show) {
     return [
@@ -17,5 +16,6 @@ $tvList = array_map(function($show) {
 }, $shows);
 
 echo json_encode($tvList);
+}
 exit();
 ?>

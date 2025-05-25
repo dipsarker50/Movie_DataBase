@@ -31,10 +31,12 @@ if (!preg_match('/^01[3-9][0-9]{8}$/', $phone)) {
 }
 
 
+
 if (isset($_FILES['uploadPic']) && $_FILES['uploadPic']['error'] === UPLOAD_ERR_OK) {
         $src = $_FILES['uploadPic']['tmp_name'];
         $ext = explode('.', $_FILES['uploadPic']['name']);
-        $des = '../assets/upload/' . $_SESSION['username'].'.'.$ext[1];
+        $filename = explode('.', $_SESSION['username']);
+        $des = '../assets/upload/' . $filename[0].'.'.$ext[1];
         if (move_uploaded_file($src, $des)) {
             $image_path = $des;
         } else {

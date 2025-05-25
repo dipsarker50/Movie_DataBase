@@ -11,21 +11,17 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 
 <script>
 
-let movies = [];
-      document.addEventListener("DOMContentLoaded", () => {
-        fetch('../controller/allMovie.php')
-          .then(response => response.json())
-          .then(data => {
-            loadMovies(data);
-            movies = data;
-            
-          })
-          .catch(error => {
-            console.error('Error loading movies:', error);
-          });
-        loadMovies(movies); 
-      });
-
+let xhttp = new XMLHttpRequest();
+xhttp.open('POST', '../controller/allMovie.php', true);
+xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhttp.send();
+xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+        let movies = JSON.parse(this.responseText);
+        const allMovies = movies.all_movies;
+        loadMovies(allMovies);
+    }
+};
 
 </script>
 
