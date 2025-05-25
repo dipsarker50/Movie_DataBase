@@ -19,7 +19,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
   xhttp.onreadystatechange = function () {
       if (this.readyState === 4 && this.status === 200) {
           let tv = JSON.parse(this.responseText);
-          loadTvShows(tv);
+          const alltv = tv.all_tv_show;
+          loadTvShows(alltv);
       }
   };
 

@@ -78,4 +78,18 @@ function deleteTVShow($id) {
     $sql = "DELETE FROM tv_shows WHERE id='$id'";
     return mysqli_query($con, $sql);
 }
+
+
+function getTrendingTVShows() {
+    $con = getConnection();
+    $sql = "SELECT * FROM tv_shows ORDER BY views DESC LIMIT 3";
+    $result = mysqli_query($con, $sql);
+
+    $tvShows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $tvShows[] = $row;
+    }
+
+    return $tvShows;
+}
 ?>

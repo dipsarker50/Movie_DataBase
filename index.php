@@ -20,7 +20,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
     <title>Movie Landing Page</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/navbar.css">
+    <link rel="stylesheet" href="assets/search.css">
     <script src="assets/index.js"></script>
+
 </head>
 
 <body>
@@ -55,51 +57,28 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 
 
     <div class="banner">
-        <h1>Welcome.</h1>
-        <p>Millions of movies, TV shows, and people to discover. Explore now.</p>
-        <div class="search-box">
-            <input type="text" id="search-box" placeholder="Search for a movie, tv show, person...">
-            <button onclick="searchBoxVaild()">Search</button> 
-            
-        </div>
-        <p id="searcherror"></p>
+    <h1>Welcome.</h1>
+    <p>Millions of movies, TV shows, and people to discover. Explore now.</p>
+
+    <div class="search-box" style="position: relative;">
+        <input type="text" id="search-box" placeholder="Search for a movie, tv show" onkeyup="liveSearch()" autocomplete="off">
+        <div id="live-suggestions" class="suggestions-dropdown"></div>
+    </div>
+
+    <p id="searcherror"></p>
+    </div>
+
+
+    <div class="trending-section" id="trending-section">
+     <h2>Trending Movies</h2>
+     <div class="movie-slider" id="movie-slider"></div>
     </div>
 
     <div class="trending-section" id="trending-section">
-  <h2>Trending Movies</h2>
-  <div class="movie-slider"></div>
-</div>
-
-
-
-    <div class="trending-section">
-        <h2>Trending TV Shows</h2>
-        <div class="movie-slider">
-            <!-- TV Shows -->
-            <a href="./controller/movie_details.php" style="text-decoration: none; color: inherit;">
-            <div class="movie-card">
-                <div class="movie-image-wrapper">
-                    <img src="https://image.tmdb.org/t/p/w500/6kbAMLteGO8yyewYau6bJ683sw7.jpg" alt="TV Show 1">
-                </div>
-                <p>TV Show Title 1</p>
-            </div>
-            <div class="movie-card">
-                <div class="movie-image-wrapper">
-                        <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;"></a>
-                    <img src="https://image.tmdb.org/t/p/w500/epGV5lIMN0E6ay2xbYl9bB5WhzF.jpg" alt="TV Show 2">
-                </div>
-                <p>TV Show Title 2</p>
-            </div>
-
-            <a href="../view/movie_details.php" style="text-decoration: none; color: inherit;"></a>
-            <div class="movie-card">
-                <div class="movie-image-wrapper">
-                    <img src="https://image.tmdb.org/t/p/w500/uGy4DCmM33I7l86W7iCskNkvmLD.jpg" alt="TV Show 3">
-                </div>
-                <p>TV Show Title 3</p>
-            </div>
-        </div>
+     <h2>Trending Tv Show</h2>
+     <div class="movie-slider" id="tv-slider"></div>
     </div>
+
 
      <!-- Footer -->
      <footer style="background-color: #1a1a1a; color: white; padding: 40px 20px; margin-top: 50px;">
@@ -140,18 +119,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 
 
     <script>
-                const dropdown = document.querySelector('.dropdown');
-                const content = dropdown.querySelector('.dropdown-content');
-                dropdown.addEventListener('mouseenter', () => {
-                    content.style.display = 'block';
-                });
-                dropdown.addEventListener('mouseleave', () => {
-                    content.style.display = 'none';
-                });
-
-
-
-
                 let xhttp = new XMLHttpRequest();
                 xhttp.open('POST', 'controller/allMovie.php', true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -161,8 +128,28 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
                         let movies = JSON.parse(this.responseText);
                         const trending = movies.trending;
                         displayTrendingMovies(trending);
+                        console.log(trending);
                     }
                 };
+
+
+                const xhttp1 = new XMLHttpRequest();
+                xhttp1.open('POST', 'controller/allTvShow.php', true);
+                xhttp1.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp1.send();
+
+                xhttp1.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                    const tvList = JSON.parse(this.responseText);
+                    const trending = tvList.trending;
+                    displayTrendingTVShows(trending);
+                    }
+                };
+
+
+
+
+
 
 
     </script>

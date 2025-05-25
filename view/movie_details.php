@@ -2,7 +2,6 @@
 session_start();
 $movie = $_SESSION['movie'];
 
-
 ?>
 
 

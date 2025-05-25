@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'trending' => $trendingList
     ];
 
-    header('Content-Type: application/json');
     echo json_encode($response);
     exit();
 }
