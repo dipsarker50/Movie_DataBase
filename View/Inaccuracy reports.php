@@ -8,7 +8,7 @@ $key = (!isset($_SESSION['status']) || $_SESSION['status'] !== true) ? 'Login' :
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Inaccuracy Reports (AJAX)</title>
+  <title>Inaccuracy Reports</title>
   <link rel="stylesheet" href="../Asset/Inaccuracy reports.css">
 </head>
 <body>
@@ -65,28 +65,22 @@ $key = (!isset($_SESSION['status']) || $_SESSION['status'] !== true) ? 'Login' :
 
 <script>
 function showSection(id) {
-  const sections = document.querySelectorAll('.section');
-  sections.forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
 function submitReport() {
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "../Controller/inaccuracycontrol.php", true);
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
   const title = document.getElementById("title").value.trim();
   const type = document.getElementById("type").value;
   const description = document.getElementById("description").value.trim();
 
-  // Clear previous errors
+  
   document.getElementById("titleErr").textContent = "";
   document.getElementById("typeErr").textContent = "";
   document.getElementById("descriptionErr").textContent = "";
   document.getElementById("successMessage").style.display = "none";
 
   let errors = false;
-
   if (!title) {
     document.getElementById("titleErr").textContent = "Title is required";
     errors = true;
@@ -101,14 +95,31 @@ function submitReport() {
   }
 
   if (!errors) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "../Controller/inaccuracycontrol.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
     const data = `title=${encodeURIComponent(title)}&type=${encodeURIComponent(type)}&description=${encodeURIComponent(description)}`;
+
     xhr.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("successMessage").style.display = "block";
-        document.getElementById("successMessage").textContent = this.responseText;
-        document.getElementById("inaccuracyForm").reset();
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        try {
+          const response = JSON.parse(xhr.responseText);
+          if (response.success) {
+            document.getElementById("successMessage").style.display = "block";
+            document.getElementById("successMessage").textContent = response.message;
+            document.getElementById("inaccuracyForm").reset();
+          } else {
+            document.getElementById("successMessage").style.display = "block";
+            document.getElementById("successMessage").textContent = response.message || "An error occurred.";
+          }
+        } catch (e) {
+          document.getElementById("successMessage").style.display = "block";
+          document.getElementById("successMessage").textContent = "Invalid JSON response from server.";
+        }
       }
     };
+
     xhr.send(data);
   }
 }
