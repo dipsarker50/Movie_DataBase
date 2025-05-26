@@ -343,29 +343,31 @@ function searchBoxVaild(){
         });
       }
       
-      
-      // document.addEventListener('DOMContentLoaded', () => {
-      //   loadMovies();
-      // });
 
 
-      function updateCountdown() {
-        const releaseDate = new Date("May 29, 2025 00:00:00").getTime();
+
+      function updateCountdown(releaseDateString) {
+        const releaseDate = new Date(releaseDateString).getTime();
         const now = new Date().getTime();
         const distance = releaseDate - now;
-
+      
+        const countdownElem = document.getElementById("countdown");
+      
+        if (!countdownElem) return;
+      
         if (distance < 0) {
-            document.getElementById("countdown").innerHTML = "Released!";
-            return;
+          countdownElem.innerHTML = "Released!";
+          return;
         }
-
+      
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("countdown").innerHTML =`${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
+      
+        countdownElem.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+      
 
     setInterval(updateCountdown, 1000);
 

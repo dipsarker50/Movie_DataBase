@@ -54,6 +54,11 @@ $movie=getMovieByTitle($moviedtitle['title']);
     </div>
   </div>
 
+  <script>
+      const releaseDate = "<?= $movie['release_date'] ?> 00:00:00";
+      updateCountdown(releaseDate);
+      setInterval(() => updateCountdown(releaseDate), 1000);
+  </script>
   <div class="release-calendar" style="margin-top: 50px; text-align: center">
     <h2>Release Countdown</h2>
     <h3 id="countdown" style="font-size: 24px; margin-top: 20px;">Loading...</h3>
