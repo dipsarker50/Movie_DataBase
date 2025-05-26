@@ -302,6 +302,47 @@ function searchBoxVaild(){
       
         loadTvShows(filteredMovies);
       }
+
+
+
+      function displayTrendingMovies(list) {
+        const slider = document.getElementById('movie-slider');
+        slider.innerHTML = '';
+      
+        list.forEach(movie => {
+          slider.innerHTML += `
+            <a href="controller/movieDetailController.php?title=${encodeURIComponent(movie.title)}" style="text-decoration: none; color: inherit;">
+              <div class="movie-card">
+                <div class="movie-image-wrapper">
+                  <img src="${movie.poster.slice(3)}" alt="${movie.title}">
+                </div>
+                <p>${movie.title}</p>
+              </div>
+            </a>
+          `;
+        });
+      }
+
+
+      function displayTrendingTVShows(list) {
+        const slider = document.getElementById('tv-slider');
+        slider.innerHTML = '';
+      
+        list.forEach(show => {
+          const posterPath = show.poster.startsWith('../') ? show.poster.slice(3) : show.poster;      
+          slider.innerHTML += `
+            <a href="controller/tvShowDetailsController.php?title=${encodeURIComponent(show.title)}" style="text-decoration: none; color: inherit;">
+              <div class="movie-card">
+                <div class="movie-image-wrapper">
+                  <img src="${posterPath}" alt="${show.title}">
+                </div>
+                <p>${show.title}</p>
+              </div>
+            </a>
+          `;
+        });
+      }
+      
       
       // document.addEventListener('DOMContentLoaded', () => {
       //   loadMovies();
@@ -309,7 +350,7 @@ function searchBoxVaild(){
 
 
       function updateCountdown() {
-        const releaseDate = new Date("May 29, 2025 00:00:00").getTime(); // Release Time
+        const releaseDate = new Date("May 29, 2025 00:00:00").getTime();
         const now = new Date().getTime();
         const distance = releaseDate - now;
 
@@ -323,10 +364,61 @@ function searchBoxVaild(){
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        //document.getElementById("countdown").innerHTML =`${days}d ${hours}h ${minutes}m ${seconds}s`;
+        document.getElementById("countdown").innerHTML =`${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 
     setInterval(updateCountdown, 1000);
+
+
+
+    function liveSearch() {
+      const input = document.getElementById("search-box").value.trim();
+    
+      if (input.length < 1) {
+        document.getElementById("live-suggestions").innerHTML = "";
+        return;
+      }
+    
+      const xhttp = new XMLHttpRequest();
+      xhttp.open("POST", "controller/searchHandler.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("query=" + encodeURIComponent(input));
+    
+      xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+          const result = JSON.parse(this.responseText);
+          renderSuggestions(result);
+        }
+      };
+    }
+    
+    function renderSuggestions(data) {
+      const box = document.getElementById("live-suggestions");
+      box.innerHTML = "";
+    
+      if (data.movies.length === 0 && data.tv_shows.length === 0) {
+        box.innerHTML = "<p class='no-match'>No results found</p>";
+        return;
+      }
+    
+      const combined = [...data.movies, ...data.tv_shows];
+    
+      combined.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "suggestion-item";
+        div.textContent = item.title;
+    
+        div.onclick = () => {
+          const url = item.is_tv
+            ? `view/tv_details.php?title=${encodeURIComponent(item.title)}`
+            : `view/movie_details.php?title=${encodeURIComponent(item.title)}`;
+          window.location.href = url;
+        };
+    
+        box.appendChild(div);
+      });
+    }
+    
           
 
 
