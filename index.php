@@ -84,14 +84,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
      <footer style="background-color: #1a1a1a; color: white; padding: 40px 20px; margin-top: 50px;">
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; max-width: 1200px; margin: auto;">
 
-            <div>
-                <h3 style="color: #f5c518;">MovieDB</h3>
-                <p style="margin-top: 10px;">
-                    <button style="background: white; color: #1a1a1a; font-weight: bold; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer;">
-                        JOIN THE COMMUNITY
-                    </button>
-                </p>
-            </div>
 
             <div>
                 <h4>The Basics</h4>
@@ -99,13 +91,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
                 <p>Contact Us</p>
                 <p>Support Forums</p>
             </div>
-
-            <div>
-                <h4>Get Involved</h4>
-                <p>Add New Movie</p>
-                <p>Add New TV Show</p>
-            </div>
-
             <div>
                 <h4>Community</h4>
                 <p>Discussions</p>
