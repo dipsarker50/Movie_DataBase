@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'all_movies' => $movieList,
         'trending' => $trendingList
     ];
-
+    header('Content-Type: application/json');
     echo json_encode($response);
     exit();
 }

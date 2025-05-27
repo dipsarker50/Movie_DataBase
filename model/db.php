@@ -1,19 +1,19 @@
 <?php
+$host = "sql12.freesqldatabase.com";
+$dbname = "sql12781551";
+$dbuser = "sql12781551";
+$dbpass = "bLxVR84MU2";
 
-    $host = "127.0.0.1";
-    $dbname = "movie_database";
-    $dbuser = "root";
-    $dbpass = "";
+function getConnection() {
+    global $host, $dbname, $dbuser, $dbpass;
 
-    function getConnection(){
-        
-        global $dbname;
-        global $dbuser;
-        global $dbpass;
+    $con = mysqli_connect($host, $dbuser, $dbpass, $dbname);
 
-        $con = mysqli_connect($GLOBALS['host'], $dbuser, $dbpass, $dbname);
-        return $con;
+    if (!$con) {
+        error_log("Connection failed: " . mysqli_connect_error());
+        die("Database connection error");
     }
 
-
+    return $con;
+}
 ?>

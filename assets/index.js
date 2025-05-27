@@ -206,12 +206,13 @@ function searchBoxVaild(){
     //   ];
 
     
+    var movies =[];
 
       function loadMovies(list) {
         console.log(list);
+        movies=list;
         const grid = document.getElementById('moviesGrid');
         grid.innerHTML = '';
-      
         list.forEach(movie => {
           grid.innerHTML += `
             <a href="../controller/movieDetailController.php?title=${encodeURIComponent(movie.title)}" style="text-decoration:none; color:inherit;">
@@ -230,7 +231,6 @@ function searchBoxVaild(){
         const selectedStatus = document.querySelector('input[name="status"]:checked').value;
         const fromDate = document.getElementById('fromDate').value;
         const toDate = document.getElementById('toDate').value;
-      
         let filteredMovies = movies.filter(movie => {
           if (searchText && !movie.title.toLowerCase().includes(searchText)) {
             return false;
@@ -253,10 +253,11 @@ function searchBoxVaild(){
         loadMovies(filteredMovies);
       }
 
-      
+      let tv =[];
 
       function loadTvShows(list) {
         console.log(list);
+        tv=list;
         const grid = document.getElementById('moviesGrid');
         grid.innerHTML = '';
       
@@ -280,7 +281,6 @@ function searchBoxVaild(){
         const selectedStatus = document.querySelector('input[name="status"]:checked').value;
         const fromDate = document.getElementById('fromDate').value;
         const toDate = document.getElementById('toDate').value;
-      
         let filteredMovies = tv.filter(movie => {
           if (searchText && !movie.title.toLowerCase().includes(searchText)) {
             return false;
@@ -412,8 +412,8 @@ function searchBoxVaild(){
     
         div.onclick = () => {
           const url = item.is_tv
-            ? `view/tv_details.php?title=${encodeURIComponent(item.title)}`
-            : `view/movie_details.php?title=${encodeURIComponent(item.title)}`;
+            ? `controller/tvShowDetailsController.php?title=${encodeURIComponent(item.title)}`
+            : `controller/movieDetailController.php?title=${encodeURIComponent(item.title)}`;
           window.location.href = url;
         };
     
