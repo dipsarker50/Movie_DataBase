@@ -5,18 +5,11 @@ function addTVShow($show) {
     $con = getConnection();
 
     $title = mysqli_real_escape_string($con, $show['title']);
-    $genre = mysqli_real_escape_string($con, is_array($show['genre']) ? implode(",", $show['genre']) : $show['genre']);
+    $genre = mysqli_real_escape_string($con, $show['genre']);
     $status = mysqli_real_escape_string($con, $show['status']);
     $start_date = mysqli_real_escape_string($con, $show['start_date']);
-
-    
-    $end_date = isset($show['end_date']) && $show['end_date'] !== ''
-        ? "'" . mysqli_real_escape_string($con, $show['end_date']) . "'"
-        : "NULL";
-
-    
-    $seasons = isset($show['seasons']) ? (int)$show['seasons'] : 1;
-
+    $end_date = isset($show['end_date']) ? "'" . mysqli_real_escape_string($con, $show['end_date']) . "'" : "NULL";
+    $seasons = (int)$show['seasons'];
     $poster_url = mysqli_real_escape_string($con, $show['poster_url']);
 
     $sql = "INSERT INTO tv_shows (title, genre, status, start_date, end_date, seasons, poster_url)
@@ -24,8 +17,6 @@ function addTVShow($show) {
 
     return mysqli_query($con, $sql);
 }
-
-
 
 function getTVShowById($id) {
     $con = getConnection();
@@ -61,11 +52,11 @@ function getAllTVShows() {
     return $shows;
 }
 
-function updateTVShowByTitle($title, $show) {
+function updateTVShow($id, $show) {
     $con = getConnection();
 
-    $title = mysqli_real_escape_string($con, $title);
-    $new_title = mysqli_real_escape_string($con, $show['title']);
+    $id = mysqli_real_escape_string($con, $id);
+    $title = mysqli_real_escape_string($con, $show['title']);
     $genre = mysqli_real_escape_string($con, $show['genre']);
     $status = mysqli_real_escape_string($con, $show['status']);
     $start_date = mysqli_real_escape_string($con, $show['start_date']);
@@ -74,23 +65,19 @@ function updateTVShowByTitle($title, $show) {
     $poster_url = mysqli_real_escape_string($con, $show['poster_url']);
 
     $sql = "UPDATE tv_shows 
-            SET title='$new_title', genre='$genre', status='$status', 
-                start_date='$start_date', end_date=$end_date, seasons=$seasons, poster_url='$poster_url'
-            WHERE title='$title'";
+            SET title='$title', genre='$genre', status='$status', start_date='$start_date', end_date=$end_date, seasons=$seasons, poster_url='$poster_url'
+            WHERE id='$id'";
 
     return mysqli_query($con, $sql);
 }
 
-
-
-function deleteTVShowByTitle($title) {
+function deleteTVShow($id) {
     $con = getConnection();
-    $title = mysqli_real_escape_string($con, $title);
+    $id = mysqli_real_escape_string($con, $id);
 
-    $sql = "DELETE FROM tv_shows WHERE title='$title'";
+    $sql = "DELETE FROM tv_shows WHERE id='$id'";
     return mysqli_query($con, $sql);
 }
-
 
 
 function getTrendingTVShows() {

@@ -16,9 +16,5 @@ function getConnection() {
  
     return $con;
 }
-<<<<<<< HEAD
 ?>
  
-=======
-?>
->>>>>>> Aditya
