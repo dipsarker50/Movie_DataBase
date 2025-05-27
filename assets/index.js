@@ -206,9 +206,10 @@ function searchBoxVaild(){
     //   ];
 
     
-
+    var movies =[];
       function loadMovies(list) {
         console.log(list);
+        movies=list;
         const grid = document.getElementById('moviesGrid');
         grid.innerHTML = '';
       
@@ -253,13 +254,13 @@ function searchBoxVaild(){
         loadMovies(filteredMovies);
       }
 
-      
+      let tv =[];
 
       function loadTvShows(list) {
         console.log(list);
         const grid = document.getElementById('moviesGrid');
         grid.innerHTML = '';
-      
+        tv=list;
         list.forEach(tv => {
           grid.innerHTML += `
             <a href="../controller/tvShowDetailsController.php?title=${encodeURIComponent(tv.title)}" style="text-decoration:none; color:inherit;">
@@ -410,8 +411,8 @@ function searchBoxVaild(){
     
         div.onclick = () => {
           const url = item.is_tv
-            ? `view/tv_details.php?title=${encodeURIComponent(item.title)}`
-            : `view/movie_details.php?title=${encodeURIComponent(item.title)}`;
+          ? `controller/tvShowDetailsController.php?title=${encodeURIComponent(item.title)}`
+          : `controller/movieDetailController.php?title=${encodeURIComponent(item.title)}`;
           window.location.href = url;
         };
     
