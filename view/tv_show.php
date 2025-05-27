@@ -12,17 +12,23 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 ?>
 
 <script>
-  let xhttp = new XMLHttpRequest();
+let allTvShows = [];
+  const xhttp = new XMLHttpRequest();
   xhttp.open('POST', '../controller/allTvShow.php', true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send();
   xhttp.onreadystatechange = function () {
-      if (this.readyState === 4 && this.status === 200) {
-          let tv = JSON.parse(this.responseText);
-          const alltv = tv.all_tv_show;
-          loadTvShows(alltv);
-      }
-  };
+    if (this.readyState === 4 && this.status === 200) {
+      let tv = JSON.parse(this.responseText);
+      allTvShows = tv.all_tv_show;
+      loadTvShows(allTvShows);
+    }
+
+
+  document.getElementById('searchInput').addEventListener('input', () => {
+    applyFiltersTv(allTvShows);
+  });
+};
 
 
 </script>
@@ -67,8 +73,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 </nav>
 
 <div class="search-bar">
-  <input type="text" id="searchInput" placeholder="Search tvshow name...">
-  <button onclick="applyFiltersTv()">Search</button>
+  <input type="text" id="searchInput" placeholder="Search tvshow name..." oninput="applyFiltersTv()">
+  <button id="filterButton" onclick="applyFiltersTv(allTvShows)">Search</button>
 </div>
 
 <div class="main-content">
@@ -91,14 +97,13 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
     <input type="date" id="fromDate">
     <input type="date" id="toDate">
 
-    <button onclick="applyFiltersTv()">Apply Filter</button>
+    <button  id="filterButton" onclick="applyFiltersTv(allTvShows)">Apply Filter</button>
   </div>
 
   <div class="movies-grid" id="moviesGrid">
   </div>
 
 </div>
-<!-- Footer -->
 <footer style="background-color: #1a1a1a; color: white; padding: 40px 20px; margin-top: 50px;">
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; max-width: 1200px; margin: auto;">
 

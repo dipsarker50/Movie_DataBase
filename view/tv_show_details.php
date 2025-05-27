@@ -1,10 +1,11 @@
 <?php
 session_start();
-$tvshow = $_SESSION['tvshow'];
+require_once('../model/tvShowModel.php');
+require_once('../model/userReviewModel.php');
+$tvshow_session = $_SESSION['tvshow'];
+$tvshow=getTVShowByTitle($tvshow_session['title']);
+$review=getReviewsByTVShow($tvshow['title']);
 ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@ $tvshow = $_SESSION['tvshow'];
             </div>
 
             <div class="user-score">
-                <div class="circle-score">67%</div>
+                <div class="circle-score"><?= getAverageRatingByMovieTitle($tvshow_session['title'])?>%</div>
                 <span>User Score</span>
             </div>
 
@@ -44,10 +45,19 @@ $tvshow = $_SESSION['tvshow'];
         </div>
     </div>
 
+    <script>
+        const releaseDate = "<?= $tvshow['start_date'] ?> 00:00:00";
+        console.log(releaseDate);
+        updateCountdown(releaseDate);
+        setInterval(() => updateCountdown(releaseDate), 1000); 
+
+    </script>
+
     <div class="release-calendar" style="margin-top: 50px; text-align: center">
         <h2>Release Countdown</h2>
         <h3 id="countdown" style="font-size: 24px; margin-top: 20px;">Loading...</h3>
     </div>
+
 
 
     <div class="overview-section">
@@ -85,50 +95,58 @@ $tvshow = $_SESSION['tvshow'];
 
             <div class="review-section">
                 <h2>Reviews</h2>
+                <?php foreach ($review as $review): ?>
                 <div class="review-box">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <div style="width: 50px; height: 50px; background: #f5c518; color: black; font-weight: bold; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">
-                            M
+                            <?= strtoupper(substr($review['user_email'], 0, 1)) ?>
                         </div>
                         <div>
-                            <h4 style="margin: 0;">A review by MovieGuys</h4>
-                            <p style="margin: 0; font-size: 14px; color: #777;">⭐ 40% — Written on April 26, 2025</p>
+                            <h4 style="margin: 0;">A review by <?= explode('@', $review['user_email'])[0] ?></h4>
+                            <p style="margin: 0; font-size: 14px; color: #777;">⭐ <?= $review['rating'] * 10 ?>% — Written on <?= date('F j, Y', strtotime($review['created_at'])) ?></p>
                         </div>
                     </div>
 
                     <p style="margin-top: 15px; font-size: 16px;">
-                        I'm a big Tom Hardy fan, so it gives me no pleasure whatsoever to say that "Havoc" isn't good at all. It's aimless, tedious, shallow, and even good acting can't save the poor script...</a>
+                        <?= nl2br(htmlspecialchars($review['review'])) ?>
                     </p>
                 </div>
+                <?php endforeach; ?>
 
                 <div style="margin-top: 40px;">
-                    <h3>Write Your Review</h3>
+                        <h3>Write Your Review</h3>
+                        <form action="../controller/userReviewController.php" method="POST">
+                            <textarea name="review" placeholder="Write your thoughts about the TV Show..." style="width: 100%; height: 120px; padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; margin-top: 10px;" required></textarea>
 
-                    <textarea id="userReview" placeholder="Write your thoughts about the movie..." style="width: 100%; height: 120px; padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; margin-top: 10px;">
-                    </textarea>
+                            <div style="margin-top: 10px;">
+                                <label for="rating" style="font-size: 16px;">Your Rating:</label>
+                                <select name="rating" id="rating" style="padding: 8px; margin-left: 10px; font-size: 16px;" required>
+                                    <option value="10">100%</option>
+                                    <option value="9">90%</option>
+                                    <option value="8">80%</option>
+                                    <option value="7">70%</option>
+                                    <option value="6">60%</option>
+                                    <option value="5">50%</option>
+                                    <option value="4">40%</option>
+                                    <option value="3">30%</option>
+                                    <option value="2">20%</option>
+                                    <option value="1">10%</option>
+                                </select>
+                            </div>
 
-                    <div style="margin-top: 10px;">
-                        <label for="rating" style="font-size: 16px;">Your Rating:</label>
-                        <select id="rating" style="padding: 8px; margin-left: 10px; font-size: 16px;">
-                            <option value="10">100%</option>
-                            <option value="9">90%</option>
-                            <option value="8">80%</option>
-                            <option value="7">70%</option>
-                            <option value="6">60%</option>
-                            <option value="5">50%</option>
-                            <option value="4">40%</option>
-                            <option value="3">30%</option>
-                            <option value="2">20%</option>
-                            <option value="1">10%</option>
-                        </select>
+                            <input type="hidden" name="content_title" value="<?= htmlspecialchars($tvshow['title']) ?>">
+                            <input type="hidden" name="content_type" value="tv_show">
+
+                            <button type="submit" style="margin-top: 20px; margin-bottom: 20px; background-color: #f5c518; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+                            Submit Review
+                            </button>
+
+                            
+                            
+                        </form>
                     </div>
 
-                    <button onclick="submitReview()" style="margin-top: 20px;margin-bottom: 20px; background-color: #f5c518; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">
-                        Submit Review
-                    </button>
                 </div>
-
-            </div>
 
 
 
