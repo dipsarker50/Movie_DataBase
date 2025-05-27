@@ -1,8 +1,7 @@
 <?php
 session_start();
-require_once('../model/db.php');
 require_once('../model/movieModel.php');
-
+require_once('../model/userReviewModel.php');
 if (!isset($_SESSION['movie'])) {
     echo "No movie selected.";
     exit();
@@ -10,7 +9,7 @@ if (!isset($_SESSION['movie'])) {
 
 $moviedtitle = $_SESSION['movie'];
 $movie=getMovieByTitle($moviedtitle['title']);
-
+$review=getReviewsByMovie($moviedtitle['title']);
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +37,7 @@ $movie=getMovieByTitle($moviedtitle['title']);
       </div>
 
       <div class="user-score">
-        <div class="circle-score"><?= intval($movie['user_score']) ?>%</div>
+        <div class="circle-score"><?= getAverageRatingByMovieTitle($movie['title'])*10 ?>%</div>
         <span>User Score</span>
       </div>
 
@@ -63,6 +62,11 @@ $movie=getMovieByTitle($moviedtitle['title']);
     <h2>Release Countdown</h2>
     <h3 id="countdown" style="font-size: 24px; margin-top: 20px;">Loading...</h3>
   </div>
+  <script>
+    const releaseDate = "<?= $movie['release_date'] ?> 00:00:00";
+    updateCountdown(releaseDate);
+    setInterval(() => updateCountdown(releaseDate), 1000); 
+  </script>
 
   <div class="overview-section">
     <h2>Overview</h2>
@@ -95,28 +99,39 @@ $movie=getMovieByTitle($moviedtitle['title']);
       </div>
 
       <div class="review-section">
-        <h2>Reviews</h2>
-        <div class="review-box">
-          <div style="display: flex; align-items: center; gap: 15px;">
-            <div style="width: 50px; height: 50px; background: #f5c518; color: black; font-weight: bold; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">
-              M
-            </div>
-            <div>
-              <h4 style="margin: 0;">A review by MovieGuys</h4>
-              <p style="margin: 0; font-size: 14px; color: #777;">⭐ 40% — Written on April 26, 2025</p>
-            </div>
-          </div>
-          <p style="margin-top: 15px; font-size: 16px;">
-            I'm a big Tom Hardy fan, so it gives me no pleasure whatsoever to say that "<?= htmlspecialchars($movie['title']) ?>" isn't good at all. It's aimless, tedious, shallow, and even good acting can't save the poor script...
-          </p>
-        </div>
+      <h2>Reviews</h2>
 
-        <div style="margin-top: 40px;">
-          <h3>Write Your Review</h3>
-          <textarea id="userReview" placeholder="Write your thoughts about the movie..." style="width: 100%; height: 120px; padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; margin-top: 10px;"></textarea>
+      <?php if (!empty($review)) : 
+          foreach ($review as $r) : ?>
+          <div class="review-box">
+            <div style="display: flex; align-items: center; gap: 15px;">
+              <div style="width: 50px; height: 50px; background: #f5c518; color: black; font-weight: bold; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">
+                <?= strtoupper(substr($r['user_email'], 0, 1)) ?>
+              </div>
+              <div>
+                <h4 style="margin: 0;">A review by <?= explode('@', $r['user_email'])[0] ?></h4>
+                <p style="margin: 0; font-size: 14px; color: #777;">
+                  ⭐ <?= $r['rating'] * 10 ?>% — Written on <?= date('F j, Y', strtotime($r['created_at'])) ?>
+                </p>
+              </div>
+            </div>
+            <p style="margin-top: 15px; font-size: 16px;">
+              <?= nl2br(htmlspecialchars($r['review'])) ?>
+            </p>
+          </div>
+        <?php endforeach; ?>
+      <?php else : ?>
+        <p style="margin: 20px 0;">No reviews yet. Be the first to write one!</p>
+      <?php endif; ?>
+
+      <div style="margin-top: 40px;">
+        <h3>Write Your Review</h3>
+        <form action="../controller/userReviewController.php" method="POST">
+          <textarea name="review" placeholder="Write your thoughts about the movie..." required style="width: 100%; height: 120px; padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; margin-top: 10px;"></textarea>
+          
           <div style="margin-top: 10px;">
             <label for="rating" style="font-size: 16px;">Your Rating:</label>
-            <select id="rating" style="padding: 8px; margin-left: 10px; font-size: 16px;">
+            <select name="rating" id="rating" required style="padding: 8px; margin-left: 10px; font-size: 16px;">
               <option value="10">100%</option>
               <option value="9">90%</option>
               <option value="8">80%</option>
@@ -129,12 +144,17 @@ $movie=getMovieByTitle($moviedtitle['title']);
               <option value="1">10%</option>
             </select>
           </div>
-          <button onclick="submitReview()" style="margin-top: 20px;margin-bottom: 20px; background-color: #f5c518; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+
+          <input type="hidden" name="content_title" value="<?= $movie['title'] ?>">
+          <input type="hidden" name="content_type" value="movie">
+
+
+          <button type="submit" style="margin-top: 20px; margin-bottom: 20px; background-color: #f5c518; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">
             Submit Review
           </button>
-        </div>
+        </form>
       </div>
-    </div>
+
 
     <div class="right-sidebar">
       <div class="sidebar-item">

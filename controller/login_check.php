@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('../model/userModel.php');
+require_once('../model/adminModel.php');
 
 $_SESSION['status'] = false;
 $_SESSION['loginError'] = '';
@@ -27,6 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'email'    => $email,
         'password' => $password
     ];
+
+    if (loginAdmin($user)) {
+        $_SESSION['status'] = true;
+        $_SESSION['username'] = $email;
+        header('Location: ../view/adminDashboard.php');
+        exit();
+    }
 
     if (login($user)) {
         $_SESSION['status'] = true;

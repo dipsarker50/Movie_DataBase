@@ -197,19 +197,12 @@ function searchBoxVaild(){
         return true;
 }
 
-    //  const movies = [
-    //     { title: "A Working Man", genre: ["Action", "Drama"], status: "Released", date: "2025-03-26", poster: "https://image.tmdb.org/t/p/w500/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg" },
-    //     { title: "Havoc", genre: ["Action", "Crime"], status: "Released", date: "2025-04-25", poster: "https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" },
-    //     { title: "Minecraft Movie", genre: ["Animation", "Adventure"], status: "Upcoming", date: "2025-03-31", poster: "https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" },
-    //     { title: "Bullet Train Explosion", genre: ["Action"], status: "Released", date: "2025-04-23", poster: "https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg" },
-    //     { title: "In the Lost Lands", genre: ["Adventure", "Action"], status: "Released", date: "2025-02-27", poster: "https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg" }
-    //   ];
 
     
-    var movies =[];
-
+      let movies =[];
       function loadMovies(list) {
         console.log(list);
+       
         movies=list;
         const grid = document.getElementById('moviesGrid');
         grid.innerHTML = '';
@@ -225,13 +218,14 @@ function searchBoxVaild(){
         });
       }
 
-      function applyFilters() {
+      function applyFilters(list) {
         const searchText = document.getElementById('searchInput').value.toLowerCase();
         const selectedGenres = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(checkbox => checkbox.value);
         const selectedStatus = document.querySelector('input[name="status"]:checked').value;
         const fromDate = document.getElementById('fromDate').value;
         const toDate = document.getElementById('toDate').value;
-        let filteredMovies = movies.filter(movie => {
+      
+        let filteredMovies = list.filter(movie => {
           if (searchText && !movie.title.toLowerCase().includes(searchText)) {
             return false;
           }
@@ -260,7 +254,7 @@ function searchBoxVaild(){
         tv=list;
         const grid = document.getElementById('moviesGrid');
         grid.innerHTML = '';
-      
+        tv=list;
         list.forEach(tv => {
           grid.innerHTML += `
             <a href="../controller/tvShowDetailsController.php?title=${encodeURIComponent(tv.title)}" style="text-decoration:none; color:inherit;">
@@ -275,13 +269,16 @@ function searchBoxVaild(){
       
 
 
-      function applyFiltersTv() {
+      function applyFiltersTv(list) {
         const searchText = document.getElementById('searchInput').value.toLowerCase();
         const selectedGenres = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(checkbox => checkbox.value);
         const selectedStatus = document.querySelector('input[name="status"]:checked').value;
         const fromDate = document.getElementById('fromDate').value;
         const toDate = document.getElementById('toDate').value;
-        let filteredMovies = tv.filter(movie => {
+
+
+        let filteredMovies = list.filter(movie => {
+
           if (searchText && !movie.title.toLowerCase().includes(searchText)) {
             return false;
           }
@@ -369,9 +366,6 @@ function searchBoxVaild(){
       }
       
 
-    setInterval(updateCountdown, 1000);
-
-
 
     function liveSearch() {
       const input = document.getElementById("search-box").value.trim();
@@ -412,8 +406,8 @@ function searchBoxVaild(){
     
         div.onclick = () => {
           const url = item.is_tv
-            ? `controller/tvShowDetailsController.php?title=${encodeURIComponent(item.title)}`
-            : `controller/movieDetailController.php?title=${encodeURIComponent(item.title)}`;
+          ? `controller/tvShowDetailsController.php?title=${encodeURIComponent(item.title)}`
+          : `controller/movieDetailController.php?title=${encodeURIComponent(item.title)}`;
           window.location.href = url;
         };
     

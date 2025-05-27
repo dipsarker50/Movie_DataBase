@@ -25,7 +25,6 @@ if (!$result || mysqli_num_rows($result) === 0) {
 
 $actor = mysqli_fetch_assoc($result);
 
-// Parse JSON fields
 $filmography = json_decode($actor['filmography'], true);
 $costars = json_decode($actor['costars'], true);
 $awards = json_decode($actor['awards'], true);

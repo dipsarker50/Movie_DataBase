@@ -10,7 +10,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
 ?>
 
 <script>
-
+let allMovies = [];
 let xhttp = new XMLHttpRequest();
 xhttp.open('POST', '../controller/allMovie.php', true);
 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -18,9 +18,13 @@ xhttp.send();
 xhttp.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
         let movies = JSON.parse(this.responseText);
-        const allMovies = movies.all_movies;
+        allMovies = movies.all_movies;
         loadMovies(allMovies);
     }
+
+    document.getElementById('searchInput').addEventListener('input', () => {
+    applyFilters(allMovies);
+  });
 };
 
 </script>
@@ -54,7 +58,7 @@ xhttp.onreadystatechange = function () {
         <div class="dropdown-content">
           <a href="profile.php"><?= $username ?></a>
           <a href="#">My watchList</a>
-          <a href="controller/logout.php">Logout</a>
+          <a href="../controller/logout.php">Logout</a>
         </div>
       </div>
     <?php } else { ?>
@@ -65,8 +69,8 @@ xhttp.onreadystatechange = function () {
 
 
 <div class="search-bar">
-  <input type="text" id="searchInput" placeholder="Search movie name...">
-  <button onclick="applyFilters()">Search</button>
+  <input type="text" id="searchInput" placeholder="Search movie name..." oninput="applyFilters()">
+  <button onclick="applyFilters(allMovies)">Search</button>
 </div>
 
 
@@ -90,7 +94,7 @@ xhttp.onreadystatechange = function () {
     <input type="date" id="fromDate">
     <input type="date" id="toDate">
 
-    <button onclick="applyFilters()">Apply Filter</button>
+    <button onclick="applyFilters(allMovies)">Apply Filter</button>
   </div>
 
   <div class="movies-grid" id="moviesGrid">
