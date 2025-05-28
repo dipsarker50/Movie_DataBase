@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background: #fff;
+  }
+  
+  h1 {
+    color: #f5c518;
+    font-size: 28px;
+  }
+  
+  h2 {
+    margin-top: 30px;
+    color: #333;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  select {
+    margin: 10px 0;
+    padding: 5px;
+  }
+  
+  #regionAlert {
+    margin: 10px 0;
+    font-weight: bold;
+    color: red;
+  }
+  
+  ul {
+    list-style: disc;
+    margin-left: 20px;
+  }
+  
+  table {
+    margin-top: 10px;
+    border-collapse: collapse;
+    width: 300px;
+  }
+  
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+  
