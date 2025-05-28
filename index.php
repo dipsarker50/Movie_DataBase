@@ -42,7 +42,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
           <a href="#" class="dropbtn"><?= $key ?></a>
           <div class="dropdown-content">
             <a href="view/profile.php"><?= $username ?></a>
-            <a href="#">My watchList</a>
+            <a href="">My watchList</a>
             <a href="controller/logout.php">Logout</a>
           </div>
         </div>
@@ -88,7 +88,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
             <div>
                 <h4>The Basics</h4>
                 <p>About MovieDB</p>
-                <p>Contact Us</p>
+                <a href="view/contact.php">Contact Us</a><br><br>
                 <a href="view/streamingLinks.php">Stream Link</a>
             </div>
             <div>
