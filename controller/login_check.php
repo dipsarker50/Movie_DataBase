@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (loginAdmin($user)) {
         $_SESSION['status'] = true;
         $_SESSION['username'] = $email;
-        header('Location: ../view/adminDashboard.php');
+        header('Location: ../view/admin_dashboard.php');
         exit();
     }
 

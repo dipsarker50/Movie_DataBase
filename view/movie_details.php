@@ -176,33 +176,25 @@ $review=getReviewsByMovie($moviedtitle['title']);
   </div>
 
   <footer style="background-color: #1a1a1a; color: white; padding: 40px 20px; margin-top: 50px;">
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; max-width: 1200px; margin: auto;">
-      <div>
-        <h3 style="color: #f5c518;">MovieDB</h3>
-        <p style="margin-top: 10px;">
-          <button style="background: white; color: #1a1a1a; font-weight: bold; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer;">
-            JOIN THE COMMUNITY
-          </button>
-        </p>
-      </div>
-      <div>
-        <h4>The Basics</h4>
-        <p>About MovieDB</p>
-        <p>Contact Us</p>
-        <p>Support Forums</p>
-      </div>
-      <div>
-        <h4>Get Involved</h4>
-        <p>Add New Movie</p>
-        <p>Add New TV Show</p>
-      </div>
-      <div>
-        <h4>Community</h4>
-        <p>Discussions</p>
-        <p>Leaderboard</p>
-      </div>
-    </div>
-  </footer>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; max-width: 1200px; margin: auto;">
+
+
+            <div>
+                <h4>The Basics</h4>
+                <p>About MovieDB</p>
+                <p>Contact Us</p>
+                <a href="streamingLinks.php">Stream Link</a>
+            </div>
+            <div>
+                <h4>Community</h4>
+                <p>Discussions</p>
+                <a href="Inaccuracy reports.php">Submit Report</a><br><br>
+                <a href="trivia.html">Trivia</a>
+            </div>
+
+
+        </div>
+    </footer> 
 
 </body>
 </html>

@@ -89,12 +89,13 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
                 <h4>The Basics</h4>
                 <p>About MovieDB</p>
                 <p>Contact Us</p>
-                <p>Support Forums</p>
+                <a href="view/streamingLinks.php">Stream Link</a>
             </div>
             <div>
                 <h4>Community</h4>
                 <p>Discussions</p>
-                <p>Leaderboard</p>
+                <a href="view/Inaccuracy reports.php">Submit Report</a><br><br>
+                <a href="view/trivia.html">Trivia</a>
             </div>
 
 

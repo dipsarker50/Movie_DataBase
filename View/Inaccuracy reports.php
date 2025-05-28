@@ -9,7 +9,7 @@ $key = (!isset($_SESSION['status']) || $_SESSION['status'] !== true) ? 'Login' :
 <head>
   <meta charset="UTF-8">
   <title>Inaccuracy Reports</title>
-  <link rel="stylesheet" href="../Asset/Inaccuracy reports.css">
+  <link rel="stylesheet" href="../assets/Inaccuracy reports.css">
 </head>
 <body>
 

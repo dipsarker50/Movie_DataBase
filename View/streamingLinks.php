@@ -9,7 +9,7 @@ $key = (!isset($_SESSION['status']) || $_SESSION['status'] !== true) ? 'Login' :
 <head>
   <meta charset="UTF-8">
   <title>Streaming Links</title>
-  <link rel="stylesheet" href="../Asset/streamingLinks.css">
+  <link rel="stylesheet" href="../assets/streamingLinks.css">
 </head>
 <body>
 

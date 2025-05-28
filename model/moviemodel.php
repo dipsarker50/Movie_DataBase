@@ -45,6 +45,17 @@ function getMovieById($id) {
     return ($result && mysqli_num_rows($result) === 1) ? mysqli_fetch_assoc($result) : null;
 }
 
+function getMovieByTitle($title) {
+    $con = getConnection();
+    $title = mysqli_real_escape_string($con, $title);
+
+    $sql = "SELECT * FROM movies WHERE title='$title' LIMIT 1";
+    $result = mysqli_query($con, $sql);
+
+    return ($result && mysqli_num_rows($result) === 1) ? mysqli_fetch_assoc($result) : null;
+}
+
+
 function getAllMovies() {
     $con = getConnection();
     $sql = "SELECT * FROM movies ORDER BY release_date DESC";
@@ -77,6 +88,19 @@ function setPosterById($id, $posterUrl) {
 
     $sql = "UPDATE movies SET poster_url='$posterUrl' WHERE id='$id'";
     return mysqli_query($con, $sql);
+}
+
+function getTrendingMovies() {
+    $con = getConnection();
+    $sql = "SELECT * FROM movies ORDER BY views DESC LIMIT 3";
+    $result = mysqli_query($con, $sql);
+
+    $movies = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $movies[] = $row;
+    }
+
+    return $movies;
 }
 
 ?>

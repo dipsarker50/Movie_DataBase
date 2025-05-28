@@ -29,6 +29,7 @@ require_once("../model/db.php");
       <button onclick="location.href='delete_tvshow.php'">Delete TV Show</button>
       <button onclick="location.href='addactor.php'">Add Actor</button>
       <button onclick="location.href='delete_actor.php'">Delete Actor</button>
+      <button onclick="location.href='../controller/logout.php'">logout</button>
     </div>
   </div>
 
