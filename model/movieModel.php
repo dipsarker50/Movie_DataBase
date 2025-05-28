@@ -34,6 +34,7 @@ function getMovieById($id) {
     return ($result && mysqli_num_rows($result) === 1) ? mysqli_fetch_assoc($result) : null;
 }
 
+
 function getMovieByTitle($title) {
     $con = getConnection();
     $title = mysqli_real_escape_string($con, $title);
