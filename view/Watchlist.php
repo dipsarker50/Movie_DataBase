@@ -1,21 +1,35 @@
 <?php
 session_start();
-$username = $_SESSION['username'] ?? '';
-$key = (!isset($_SESSION['status']) || $_SESSION['status'] !== true) ? 'Login' : 'Profile';
+require_once '../model/db.php';               
+require_once '../model/UserWatchlistModel.php';  
+
+
+$userEmail = $_SESSION['username'];
+if (!isset($_SESSION['status']) || $_SESSION['status'] !== true) {
+  $key = 'Login';
+}else{
+  $key = 'Profile';
+}
 
 $listName = $movieName = "";
 $listErr = $movieErr = "";
-$watchlists = [];
 $success = "";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['createList'])) {
         if (empty($_POST["newListName"])) {
             $listErr = "List name is required.";
+        } elseif (empty($userEmail)) {
+            $listErr = "You must be logged in to create a list.";
         } else {
             $listName = htmlspecialchars($_POST["newListName"]);
-            $watchlists[] = $listName;
-            $success = "List '$listName' created successfully.";
+            
+            if (addToWatchlist($listName, 'Placeholder', 'movie', $userEmail)) {
+                $success = "List '$listName' created successfully.";
+            } else {
+                $listErr = "Failed to create list.";
+            }
         }
     }
 
@@ -24,13 +38,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $movieErr = "Movie title is required.";
         } elseif (empty($_POST["listSelect"])) {
             $movieErr = "Select a watchlist to add the movie.";
+        } elseif (empty($userEmail)) {
+            $movieErr = "You must be logged in to add a movie.";
         } else {
             $movieName = htmlspecialchars($_POST["movieName"]);
             $selectedList = htmlspecialchars($_POST["listSelect"]);
-            $success = "Movie '$movieName' added to list '$selectedList'.";
+            if (addToWatchlist($selectedList, $movieName, 'movie', $userEmail)) {
+                $success = "Movie '$movieName' added to list '$selectedList'.";
+            } else {
+                $movieErr = "Failed to add movie to watchlist.";
+            }
         }
     }
 }
+
+
+$lists = !empty($userEmail) ? getUserLists($userEmail) : [];
 ?>
 
 <!DOCTYPE html>
@@ -38,15 +61,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <title>Watchlist Manager</title>
-  <link rel="stylesheet" href="../Asset/watchlist.css">
+  <link rel="stylesheet" href="../assets/watchlist.css">
+  <style>
+    .error { color: red; }
+  </style>
 </head>
 <body>
 
 <div class="container">
   <h2>Watchlist Manager</h2>
 
+  <?php if (empty($userEmail)): ?>
+    <p style="color: red;">You must be logged in to manage your watchlists.</p>
+  <?php endif; ?>
+
   <form method="POST" action="<?= htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <input type="text" name="newListName" placeholder="New Watchlist Name" value="<?= $listName ?>">
+    <input type="text" name="newListName" placeholder="New Watchlist Name" value="<?= htmlspecialchars($listName) ?>">
     <span class="error"><?= $listErr ?></span>
     <br>
     <button type="submit" name="createList" class="share-button">Create List</button>
@@ -56,13 +86,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <form method="POST" action="<?= htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <select name="listSelect">
       <option value="">Select Watchlist</option>
-      <?php
-      if (!empty($listName)) {
-          echo "<option selected>$listName</option>";
-      }
+      <?php foreach ($lists as $list):
+          if ($list === 'Placeholder') continue; 
       ?>
+        <option value="<?= htmlspecialchars($list) ?>"><?= htmlspecialchars($list) ?></option>
+      <?php endforeach; ?>
     </select>
-    <input type="text" name="movieName" placeholder="Movie Title" value="<?= $movieName ?>">
+    <input type="text" name="movieName" placeholder="Movie Title" value="<?= htmlspecialchars($movieName) ?>">
     <span class="error"><?= $movieErr ?></span>
     <br>
     <button type="submit" name="addMovie" class="share-button">Add Movie</button>

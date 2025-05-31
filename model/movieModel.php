@@ -24,6 +24,7 @@ function addMovie($movie) {
         return mysqli_query($conn, $query);
     }
 
+    
 function getMovieById($id) {
     $con = getConnection();
     $id = mysqli_real_escape_string($con, $id);
